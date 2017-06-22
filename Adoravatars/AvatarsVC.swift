@@ -15,7 +15,7 @@ class AvatarsVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let manager = AvatarsManager.shared
-    fileprivate lazy var avatars:[Avatar] = self.defaultAvatarIDs().map{Avatar($0)}
+    fileprivate lazy var avatars:[Avatar] = self.defaultAvatarIDs().map{Avatar(identifier: $0)}
 
     
     
@@ -26,8 +26,6 @@ class AvatarsVC: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: self, action: #selector(networkButtonTapped))
-        
-        collectionView.reloadData()
     }
     
     

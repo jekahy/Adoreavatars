@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-
+import RxSwift
+import RxCocoa
 
 class DownloadsVC: UIViewController {
     
@@ -16,48 +17,21 @@ class DownloadsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    fileprivate var downloadTasks = [DownloadTask]()
+    fileprivate let disposeBag = DisposeBag()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.dataSource = self
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        downloadTasks = getDownloads()
-        tableView.reloadData()
-    }
-    
-    
-    private func getDownloads()->[DownloadTask]
+    override func viewDidLoad()
     {
-        let api = AvatarsManager.shared
-        return Array(api.downloadTasks)
-    }
-}
-
-extension DownloadsVC:UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        super.viewDidLoad()
         
-        return downloadTasks.count
+        AvatarsManager.shared.downloadTasks.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: DownloadCell.self))
+        { (index, task: DownloadTask, cell) in
+            cell.configureWithTask(task)
+            
+            }.addDisposableTo(disposeBag)
+
     }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? DownloadCell else {
-            return UITableViewCell()
-        }
-        let task = downloadTasks[indexPath.row]
-        cell.configureWithTask(task)
-        return cell
-    }
-    
+
 }
+
 
 

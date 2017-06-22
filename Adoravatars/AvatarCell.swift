@@ -23,9 +23,7 @@ class AvatarCell: UICollectionViewCell {
     func configure(with avatar:Avatar, api:AvatarsManager)
     {
         disposeBag = DisposeBag()
-
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
+        toggleActivityIndicatorStatus(false)
         imgView.image = nil
 
         api.downloadAvatarImage(avatar)
@@ -34,32 +32,38 @@ class AvatarCell: UICollectionViewCell {
             .subscribe(onNext: {[weak self] image in
                 
             self?.imgView.image = image
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
+            self?.toggleActivityIndicatorStatus(true)
 
         }, onError: {[weak self] error in
             
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
-
+            self?.toggleActivityIndicatorStatus(true)
 
         }).disposed(by: disposeBag)
         
         textLabel.text = avatar.identifier
     }
     
-    override func prepareForReuse()
-    {
-        super.prepareForReuse()
-        disposeBag = DisposeBag()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        activityIndicator.hidesWhenStopped = true
     }
-    
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()
         imgView.layer.cornerRadius = imgView.bounds.size.width/2
         imgView.layer.masksToBounds = true
+    }
+    
+    
+    private func toggleActivityIndicatorStatus(_ stop:Bool)
+    {
+        if stop {
+            activityIndicator.stopAnimating()
+        }else{
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+        }
+        
     }
     
     

@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 import RxSwift
-import RxCocoa
-
-
-enum DownloadResult<R> {
-    case success(R)
-    case failure(Error)
-}
 
 enum DownloadState:String {
     case queued = "queued"
@@ -23,7 +16,6 @@ enum DownloadState:String {
     case done = "done"
     case failed = "failed"
 }
-
 
 enum DownloadError:Error {
     
@@ -36,17 +28,16 @@ class AvatarsManager:NSObject{
     static let shared = AvatarsManager()
     private let baseUrl = "http://api.adorable.io/avatar/"
     
-    private var cache = URLCache()
     private lazy var session:URLSession = {
+        let mb = 1024*1024
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
-        config.urlCache = URLCache.shared
-        let s = URLSession(configuration: config, delegate: self, delegateQueue: nil)
-        
-        return s
+        config.urlCache = URLCache(memoryCapacity: 100*mb, diskCapacity: 100*mb, diskPath: "avatars")
+        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
     
-    fileprivate (set) var downloadTasks = Set<DownloadTask>()
+    fileprivate let downloadsVar = Variable<[DownloadTask]>([])
+    private (set) lazy var downloadTasks:Observable<[DownloadTask]> = self.downloadsVar.asObservable()
     
     
     func downloadAvatarImage(_ avatar:Avatar)->Observable<UIImage?>
@@ -64,18 +55,18 @@ class AvatarsManager:NSObject{
     func getAvatar(_ avatartID:String)->DownloadTask
     {
         
-        if let task = downloadTasks.first(where: {$0.avatar.identifier == avatartID}){
+        if let task = downloadsVar.value.first(where: {$0.avatar.identifier == avatartID}){
             return task
         }
 
-        let avatar = Avatar(avatartID)
+        let avatar = Avatar(identifier: avatartID)
         let url = urlForAvatarID(avatar.identifier)
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
         let sessionTask = session.downloadTask(with: request)
         sessionTask.resume()
 
         let downloadTask = DownloadTask(taskID: sessionTask.taskIdentifier, avatar: avatar)
-        downloadTasks.insert(downloadTask)
+        downloadsVar.value.append(downloadTask)
         return downloadTask
     }
     
@@ -94,7 +85,7 @@ extension AvatarsManager: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL)
     {
-        guard let dTask = downloadTasks.first(where: {$0.taskID == downloadTask.taskIdentifier}) else {
+        guard let dTask = retrieveTaskWithID(downloadTask.taskIdentifier) else {
             return
         }
         
@@ -109,12 +100,11 @@ extension AvatarsManager: URLSessionDownloadDelegate {
             dTask.state = .failed
             dTask.completionSubj.onError(DownloadError.failed)
         }
-        
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-        guard let dTask = downloadTasks.first(where: {$0.taskID == downloadTask.taskIdentifier}) else {
+        guard let dTask = retrieveTaskWithID(downloadTask.taskIdentifier) else {
             return
         }
         
@@ -125,7 +115,7 @@ extension AvatarsManager: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
      
-        guard let dTask = downloadTasks.first(where: {$0.taskID == task.taskIdentifier}) else {
+        guard let dTask = retrieveTaskWithID(task.taskIdentifier) else {
             return
         }
         
@@ -134,8 +124,12 @@ extension AvatarsManager: URLSessionDownloadDelegate {
             dTask.completionSubj.onError(error)
         }
     }
+    
+    
+    private func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
+    {
+        return downloadsVar.value.first(where: {$0.taskID == taskID})
+    }
+
 }
-
-
-
 
