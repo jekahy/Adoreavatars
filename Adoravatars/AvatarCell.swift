@@ -50,6 +50,8 @@ class AvatarCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        imgView.setNeedsLayout()
+        imgView.layoutIfNeeded()
         imgView.layer.cornerRadius = imgView.bounds.size.width/2
         imgView.layer.masksToBounds = true
     }

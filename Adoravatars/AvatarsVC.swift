@@ -25,6 +25,7 @@ class AvatarsVC: UIViewController {
         navigationItem.title = "Adoreavatars"
         collectionView.dataSource = self
         collectionView.delegate = self
+        automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: self, action: #selector(networkButtonTapped))
     }
     
@@ -66,7 +67,7 @@ extension AvatarsVC:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = view.frame.size.width/3-20
+        let w = view.frame.size.width/3-10
         return CGSize(width:w , height: w)
     }
 
