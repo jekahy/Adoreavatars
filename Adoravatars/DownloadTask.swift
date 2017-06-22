@@ -19,7 +19,6 @@ class DownloadTask{
     
     let completionSubj = BehaviorSubject<UIImage?>(value:nil)
     
-    
     init(taskID:Int, avatar:Avatar) {
         self.taskID = taskID
         self.avatar = avatar

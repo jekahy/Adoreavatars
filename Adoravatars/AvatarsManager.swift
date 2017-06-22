@@ -26,13 +26,16 @@ enum DownloadError:Error {
 class AvatarsManager:NSObject{
     
     static let shared = AvatarsManager()
+    private static let mb = 1024*1024
     private let baseUrl = "http://api.adorable.io/avatar/"
     
+    fileprivate let cache = URLCache(memoryCapacity: 100*mb, diskCapacity: 100*mb, diskPath: "avatars")
+    
     private lazy var session:URLSession = {
-        let mb = 1024*1024
+        
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
-        config.urlCache = URLCache(memoryCapacity: 100*mb, diskCapacity: 100*mb, diskPath: "avatars")
+        config.urlCache = self.cache
         return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
     
@@ -58,10 +61,9 @@ class AvatarsManager:NSObject{
         if let task = downloadsVar.value.first(where: {$0.avatar.identifier == avatartID}){
             return task
         }
-
         let avatar = Avatar(identifier: avatartID)
-        let url = urlForAvatarID(avatar.identifier)
-        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
+        let request = urlRequestFor(avatar)
+        
         let sessionTask = session.downloadTask(with: request)
         sessionTask.resume()
 
@@ -71,12 +73,20 @@ class AvatarsManager:NSObject{
     }
     
     
+//    MARK: Helpers
+    
     private func urlForAvatarID(_ id:String)->URL
     {
         var path = baseUrl + id
         path = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         return URL(string:path)!
+    }
+    
+    private func urlRequestFor(_ avatar:Avatar)->URLRequest
+    {
+        let url = urlForAvatarID(avatar.identifier)
+        return URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
     }
 }
 
@@ -91,16 +101,20 @@ extension AvatarsManager: URLSessionDownloadDelegate {
         
         dTask.progressSubj.onCompleted()
 
-        if let data = try? Data(contentsOf: location), let image = UIImage(data: data)
+        guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
         {
-            dTask.state = .done
-            dTask.completionSubj.onNext(image)
-            
-        }else{
+         
             dTask.state = .failed
             dTask.completionSubj.onError(DownloadError.failed)
+            return
         }
+        
+        cacheData(data, for: downloadTask, cache: cache)
+        
+        dTask.state = .done
+        dTask.completionSubj.onNext(image)
     }
+    
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
@@ -112,6 +126,8 @@ extension AvatarsManager: URLSessionDownloadDelegate {
         dTask.state = .inProgress
         dTask.progressSubj.onNext(progress)
     }
+    
+    
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
      
@@ -129,6 +145,15 @@ extension AvatarsManager: URLSessionDownloadDelegate {
     private func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
     {
         return downloadsVar.value.first(where: {$0.taskID == taskID})
+    }
+    
+    
+    private func cacheData(_ data:Data, for task:URLSessionDownloadTask, cache:URLCache)
+    {
+        if let response = task.response, let request = task.originalRequest{
+            let cached = CachedURLResponse(response: response, data: data)
+            cache.storeCachedResponse(cached, for: request)
+        }
     }
 
 }

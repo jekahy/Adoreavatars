@@ -60,6 +60,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E186B2381EFBF986008EF533 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */,
+				E191633A1EFABB0B0083496E /* DownloadsVC.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E186B2391EFBF992008EF533 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E19163321EFA99CA0083496E /* AvatarCell.swift */,
+				E191633C1EFAD27E0083496E /* DownloadCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		E1A0C02A1EFA9782003393D9 = {
 			isa = PBXGroup;
 			children = (
@@ -85,10 +103,8 @@
 				E19163361EFA9D760083496E /* AvatarsManager.swift */,
 				E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */,
 				E19163341EFA9D0A0083496E /* Avatar.swift */,
-				E19163321EFA99CA0083496E /* AvatarCell.swift */,
-				E191633C1EFAD27E0083496E /* DownloadCell.swift */,
-				E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */,
-				E191633A1EFABB0B0083496E /* DownloadsVC.swift */,
+				E186B2391EFBF992008EF533 /* Cells */,
+				E186B2381EFBF986008EF533 /* Controllers */,
 				E1A0C03A1EFA9782003393D9 /* Main.storyboard */,
 				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */,
