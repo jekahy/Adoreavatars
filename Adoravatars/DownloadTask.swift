@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class DownloadTask:Hashable, Equatable {
+class DownloadTask{
     
     let taskID:Int
     let avatar:Avatar
@@ -24,14 +24,4 @@ class DownloadTask:Hashable, Equatable {
         self.taskID = taskID
         self.avatar = avatar
     }
-    
-    var hashValue: Int {
-        return taskID
-    }
-    
-    static func ==(lhs: DownloadTask, rhs: DownloadTask) -> Bool
-    {
-        return lhs.taskID == rhs.taskID
-    }
-    
 }
