@@ -7,17 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74F8E9CDC7A4251E60203882 /* Pods_Adoravatars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */; };
+		E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163321EFA99CA0083496E /* AvatarCell.swift */; };
+		E19163351EFA9D0A0083496E /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163341EFA9D0A0083496E /* Avatar.swift */; };
+		E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163361EFA9D760083496E /* AvatarsManager.swift */; };
+		E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633A1EFABB0B0083496E /* DownloadsVC.swift */; };
+		E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633C1EFAD27E0083496E /* DownloadCell.swift */; };
+		E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */; };
 		E1A0C0371EFA9782003393D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0361EFA9782003393D9 /* AppDelegate.swift */; };
-		E1A0C0391EFA9782003393D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0381EFA9782003393D9 /* ViewController.swift */; };
+		E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */; };
 		E1A0C03C1EFA9782003393D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03A1EFA9782003393D9 /* Main.storyboard */; };
 		E1A0C03E1EFA9782003393D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03D1EFA9782003393D9 /* Assets.xcassets */; };
 		E1A0C0411EFA9782003393D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.debug.xcconfig"; sourceTree = "<group>"; };
+		19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adoravatars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.release.xcconfig"; sourceTree = "<group>"; };
+		E19163321EFA99CA0083496E /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		E19163341EFA9D0A0083496E /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		E19163361EFA9D760083496E /* AvatarsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsManager.swift; sourceTree = "<group>"; };
+		E191633A1EFABB0B0083496E /* DownloadsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVC.swift; sourceTree = "<group>"; };
+		E191633C1EFAD27E0083496E /* DownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
+		E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
 		E1A0C0331EFA9782003393D9 /* Adoravatars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adoravatars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A0C0361EFA9782003393D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E1A0C0381EFA9782003393D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarsVC.swift; sourceTree = "<group>"; };
 		E1A0C03B1EFA9782003393D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E1A0C03D1EFA9782003393D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1A0C0401EFA9782003393D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -29,17 +45,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F8E9CDC7A4251E60203882 /* Pods_Adoravatars.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A23EDC8A5F3A6CEA0B4B422 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E1A0C02A1EFA9782003393D9 = {
 			isa = PBXGroup;
 			children = (
 				E1A0C0351EFA9782003393D9 /* Adoravatars */,
 				E1A0C0341EFA9782003393D9 /* Products */,
+				FE66DFF6527F0D3269CD66E5 /* Pods */,
+				3A23EDC8A5F3A6CEA0B4B422 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +82,28 @@
 			isa = PBXGroup;
 			children = (
 				E1A0C0361EFA9782003393D9 /* AppDelegate.swift */,
-				E1A0C0381EFA9782003393D9 /* ViewController.swift */,
+				E19163361EFA9D760083496E /* AvatarsManager.swift */,
+				E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */,
+				E19163341EFA9D0A0083496E /* Avatar.swift */,
+				E19163321EFA99CA0083496E /* AvatarCell.swift */,
+				E191633C1EFAD27E0083496E /* DownloadCell.swift */,
+				E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */,
+				E191633A1EFABB0B0083496E /* DownloadsVC.swift */,
 				E1A0C03A1EFA9782003393D9 /* Main.storyboard */,
 				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */,
 				E1A0C0421EFA9782003393D9 /* Info.plist */,
 			);
 			path = Adoravatars;
+			sourceTree = "<group>";
+		};
+		FE66DFF6527F0D3269CD66E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */,
+				87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1A0C0451EFA9782003393D9 /* Build configuration list for PBXNativeTarget "Adoravatars" */;
 			buildPhases = (
+				1ADC1559EFCAFCB656655E85 /* [CP] Check Pods Manifest.lock */,
 				E1A0C02F1EFA9782003393D9 /* Sources */,
 				E1A0C0301EFA9782003393D9 /* Frameworks */,
 				E1A0C0311EFA9782003393D9 /* Resources */,
+				095754DAA1176907921A668E /* [CP] Embed Pods Frameworks */,
+				4D309C25853EA6DF354E4AD4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,12 +177,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		095754DAA1176907921A668E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1ADC1559EFCAFCB656655E85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4D309C25853EA6DF354E4AD4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E1A0C02F1EFA9782003393D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1A0C0391EFA9782003393D9 /* ViewController.swift in Sources */,
+				E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */,
+				E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */,
+				E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */,
+				E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */,
+				E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */,
+				E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */,
+				E19163351EFA9D0A0083496E /* Avatar.swift in Sources */,
 				E1A0C0371EFA9782003393D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +360,7 @@
 		};
 		E1A0C0461EFA9782003393D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 93V5PGPZMP;
@@ -274,6 +374,7 @@
 		};
 		E1A0C0471EFA9782003393D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 93V5PGPZMP;
@@ -304,6 +405,7 @@
 				E1A0C0471EFA9782003393D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
