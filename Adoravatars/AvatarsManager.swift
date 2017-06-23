@@ -17,7 +17,7 @@ class AvatarsManager:NSObject{
     
     static let shared = AvatarsManager()
     private static let mb = 1024*1024
-    private let baseUrl = "http://api.adorable.io/avatar/"
+    fileprivate let baseUrl = "http://api.adorable.io/avatar/"
     
     fileprivate let cache = URLCache(memoryCapacity: 100*mb, diskCapacity: 0, diskPath: nil)
     
@@ -71,7 +71,6 @@ class AvatarsManager:NSObject{
                 }
             }
             
-            
         }).disposed(by: disposeBag)
     }
     
@@ -79,7 +78,7 @@ class AvatarsManager:NSObject{
     
     func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     {
-        let task = getAvatarImage(avatar)
+        let task = startDownloadTask(for:avatar)
         return task.eventSubj.asObservable()
     }
     
@@ -89,7 +88,7 @@ class AvatarsManager:NSObject{
         return AvatarsManager.defaultAvatars()
     }
     
-    func getAvatarImage(_ avatar:Avatar)->DownloadTask
+    private func startDownloadTask(for avatar:Avatar)->DownloadTask
     {
         let request = urlRequestFor(avatar)
         
@@ -105,11 +104,13 @@ class AvatarsManager:NSObject{
         }
         return downloadTask
     }
-    
-    
-//    MARK: Helpers
-    
-    private func urlForAvatarID(_ id:String)->URL
+}
+
+extension AvatarsManager {
+
+    //    MARK: Helpers
+
+    fileprivate func urlForAvatarID(_ id:String)->URL
     {
         var path = baseUrl + id
         path = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -117,26 +118,27 @@ class AvatarsManager:NSObject{
         return URL(string:path)!
     }
     
-    private func urlRequestFor(_ avatar:Avatar)->URLRequest
+    fileprivate func urlRequestFor(_ avatar:Avatar)->URLRequest
     {
         let url = urlForAvatarID(avatar.identifier)
         return URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
     }
     
     
-    private func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
+    fileprivate func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
     {
         return downloadsVar.value.first(where: {$0.taskID == taskID})
     }
     
     
-    private func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)
+    fileprivate func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)
     {
         if let response = task.response, let request = task.originalRequest{
             let cached = CachedURLResponse(response: response, data: data)
             cache.storeCachedResponse(cached, for: request)
         }
     }
+
 }
 
 
