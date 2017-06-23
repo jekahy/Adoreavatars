@@ -103,15 +103,11 @@ extension AvatarsManager: URLSessionDownloadDelegate {
 
         guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
         {
-         
-            dTask.state = .failed
             dTask.completionSubj.onError(DownloadError.failed)
             return
         }
         
         cacheData(data, for: downloadTask, cache: cache)
-        
-        dTask.state = .done
         dTask.completionSubj.onNext(image)
     }
     
@@ -123,7 +119,6 @@ extension AvatarsManager: URLSessionDownloadDelegate {
         }
         
         let progress = Double(totalBytesWritten/totalBytesExpectedToWrite)
-        dTask.state = .inProgress
         dTask.progressSubj.onNext(progress)
     }
     
@@ -136,7 +131,7 @@ extension AvatarsManager: URLSessionDownloadDelegate {
         }
         
         if let error = error {
-            dTask.state = .failed
+            dTask.progressSubj.onError(error)
             dTask.completionSubj.onError(error)
         }
     }

@@ -13,14 +13,24 @@ class DownloadTask{
     let taskID:Int
     let avatar:Avatar
     
-    var state:DownloadState = .queued
+    private (set) var state:DownloadState = .queued
     
     let progressSubj = BehaviorSubject<Double>(value:0)
     
     let completionSubj = BehaviorSubject<UIImage?>(value:nil)
     
+    private let disposeBag = DisposeBag()
+    
     init(taskID:Int, avatar:Avatar) {
         self.taskID = taskID
         self.avatar = avatar
+        
+        progressSubj.asObservable().subscribe(onNext: {[unowned self] _ in
+            self.state = .inProgress
+        }, onError: { [unowned self] _ in
+            self.state = .failed
+        }, onCompleted: { [unowned self] in
+            self.state = .done
+        }).disposed(by: disposeBag)
     }
 }
