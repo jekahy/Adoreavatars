@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		74F8E9CDC7A4251E60203882 /* Pods_Adoravatars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */; };
+		E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */; };
+		E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */; };
 		E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163321EFA99CA0083496E /* AvatarCell.swift */; };
 		E19163351EFA9D0A0083496E /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163341EFA9D0A0083496E /* Avatar.swift */; };
 		E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163361EFA9D760083496E /* AvatarsManager.swift */; };
@@ -25,6 +27,8 @@
 		15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.debug.xcconfig"; sourceTree = "<group>"; };
 		19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adoravatars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.release.xcconfig"; sourceTree = "<group>"; };
+		E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDownloadEventsObserver.swift; sourceTree = "<group>"; };
+		E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDownloadEvent.swift; sourceTree = "<group>"; };
 		E19163321EFA99CA0083496E /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		E19163341EFA9D0A0083496E /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		E19163361EFA9D760083496E /* AvatarsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsManager.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		E1A0C0351EFA9782003393D9 /* Adoravatars */ = {
 			isa = PBXGroup;
 			children = (
+				E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */,
+				E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */,
 				E1A0C0361EFA9782003393D9 /* AppDelegate.swift */,
 				E19163361EFA9D760083496E /* AvatarsManager.swift */,
 				E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */,
@@ -247,7 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */,
+				E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */,
 				E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */,
+				E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */,
 				E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */,
 				E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */,
 				E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */,

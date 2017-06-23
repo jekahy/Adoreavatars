@@ -28,14 +28,58 @@ class AvatarsManager:NSObject{
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
         config.urlCache = self.cache
-        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        return URLSession(configuration: config, delegate: self.sessionDelegateObserver, delegateQueue: nil)
     }()
     
     fileprivate let downloadsVar = Variable<[DownloadTask]>([])
     private (set) lazy var downloadTasks:Observable<[DownloadTask]> = self.downloadsVar.asObservable()
     
+    fileprivate let sessionDelegateObserver = URLSessionDownloadEventsObserver()
     
-    func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
+    private let disposeBag = DisposeBag()
+    
+    private override init()
+    {
+        super.init()
+        
+        sessionDelegateObserver.eventsSubject.subscribe(onNext: {[unowned self] sessionEvent in
+            
+            guard let dTask = self.retrieveTaskWithID(sessionEvent.task.taskIdentifier) else {
+                return
+            }
+            
+            switch sessionEvent.type {
+                
+            case .didWriteData(let progress):
+                
+                dTask.eventSubj.onNext(.progress(progress))
+                
+            case .didFinishDownloading(let location):
+                
+                guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
+                {
+                    dTask.eventSubj.onError(DownloadError.failed)
+                    return
+                }
+                self.cacheData(data, for: sessionEvent.task, cache: self.cache)
+                
+                dTask.eventSubj.onNext(.done(image))
+                dTask.eventSubj.onCompleted()
+                
+            case .didCompleteWithError( let error):
+                
+                if let error = error {
+                    dTask.eventSubj.onError(error)
+                }
+            }
+            
+            
+        }).disposed(by: disposeBag)
+    }
+    
+    
+    
+func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     {
         let task = getAvatar(avatar.identifier)
         return task.eventSubj.asObservable()
@@ -82,51 +126,6 @@ class AvatarsManager:NSObject{
         let url = urlForAvatarID(avatar.identifier)
         return URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
     }
-}
-
-
-extension AvatarsManager: URLSessionDownloadDelegate {
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL)
-    {
-        guard let dTask = retrieveTaskWithID(downloadTask.taskIdentifier) else {
-            return
-        }
-
-        guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
-        {
-            dTask.eventSubj.onError(DownloadError.failed)
-            return
-        }
-        
-        cacheData(data, for: downloadTask, cache: cache)
-        dTask.eventSubj.onNext(.done(image))
-        dTask.eventSubj.onCompleted()
-    }
-    
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        
-        guard let dTask = retrieveTaskWithID(downloadTask.taskIdentifier) else {
-            return
-        }
-        
-        let progress = Float(totalBytesWritten/totalBytesExpectedToWrite)
-        dTask.eventSubj.onNext(.progress(progress))
-    }
-    
-    
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-     
-        guard let dTask = retrieveTaskWithID(task.taskIdentifier) else {
-            return
-        }
-        
-        if let error = error {
-            dTask.eventSubj.onError(error)
-        }
-    }
     
     
     private func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
@@ -135,7 +134,7 @@ extension AvatarsManager: URLSessionDownloadDelegate {
     }
     
     
-    private func cacheData(_ data:Data, for task:URLSessionDownloadTask, cache:URLCache)
+    private func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)
     {
         if let response = task.response, let request = task.originalRequest{
             let cached = CachedURLResponse(response: response, data: data)

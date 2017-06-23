@@ -15,6 +15,7 @@ class DownloadCell: UITableViewCell {
     
     @IBOutlet weak var textLab: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     
     private var disposeBag = DisposeBag()
@@ -27,15 +28,14 @@ class DownloadCell: UITableViewCell {
         statusLabel.text = "queued"
         progressView.progress = 0
 
-
+        
         task.eventSubj
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] event in
                 
-                
                 if case .progress(let progress) = event {
                     self?.statusLabel.text = "in progress"
-                    self?.progressView.progress = progress
+                    self?.progressView.progress = Float(progress)
                 }
             
             }, onError: { [weak self] _ in

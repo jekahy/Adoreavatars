@@ -119,7 +119,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RFQ-Bh-IEe" id="tPy-r4-oVY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-Gr-bkt">
@@ -132,7 +132,7 @@
                                                     <rect key="frame" x="18" y="33" width="339" height="2"/>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9q-W9-x0k">
-                                                    <rect key="frame" x="282" y="11" width="75" height="21"/>
+                                                    <rect key="frame" x="282" y="0.0" width="75" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="qMK-eo-Bxt"/>
                                                     </constraints>
@@ -140,12 +140,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HH-na-YHM">
+                                                    <rect key="frame" x="282" y="22" width="75" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="0HH-na-YHM" firstAttribute="top" secondItem="e9q-W9-x0k" secondAttribute="bottom" constant="2" id="KcQ-Wn-p6z"/>
                                                 <constraint firstItem="o2u-pd-af0" firstAttribute="leading" secondItem="tPy-r4-oVY" secondAttribute="leadingMargin" constant="10" id="MCK-N9-gbz"/>
                                                 <constraint firstItem="C2M-Gr-bkt" firstAttribute="centerY" secondItem="tPy-r4-oVY" secondAttribute="centerY" id="RAy-PZ-X7M"/>
+                                                <constraint firstItem="0HH-na-YHM" firstAttribute="centerX" secondItem="e9q-W9-x0k" secondAttribute="centerX" id="VLB-5l-Hw3"/>
                                                 <constraint firstItem="o2u-pd-af0" firstAttribute="bottom" secondItem="tPy-r4-oVY" secondAttribute="bottomMargin" id="YmH-Pl-eY5"/>
-                                                <constraint firstItem="e9q-W9-x0k" firstAttribute="centerY" secondItem="tPy-r4-oVY" secondAttribute="centerY" id="ZlO-aX-mNA"/>
+                                                <constraint firstItem="e9q-W9-x0k" firstAttribute="top" secondItem="tPy-r4-oVY" secondAttribute="top" id="aq5-Vv-qxS"/>
+                                                <constraint firstItem="0HH-na-YHM" firstAttribute="width" secondItem="e9q-W9-x0k" secondAttribute="width" id="jA2-sK-eCq"/>
                                                 <constraint firstItem="e9q-W9-x0k" firstAttribute="leading" secondItem="C2M-Gr-bkt" secondAttribute="trailing" constant="10" id="qBZ-MJ-68T"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="o2u-pd-af0" secondAttribute="trailing" constant="10" id="sPT-JI-c3E"/>
                                                 <constraint firstItem="C2M-Gr-bkt" firstAttribute="leading" secondItem="tPy-r4-oVY" secondAttribute="leadingMargin" constant="10" id="sng-wM-jTb"/>
@@ -156,6 +165,7 @@
                                             <outlet property="progressView" destination="o2u-pd-af0" id="aer-Ne-Xfn"/>
                                             <outlet property="statusLabel" destination="e9q-W9-x0k" id="Cbm-wX-U6S"/>
                                             <outlet property="textLab" destination="C2M-Gr-bkt" id="eWp-uw-9Vd"/>
+                                            <outlet property="timeStampLabel" destination="0HH-na-YHM" id="sSX-ad-DaT"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

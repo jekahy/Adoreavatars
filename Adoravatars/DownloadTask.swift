@@ -11,7 +11,7 @@ import RxSwift
 
 enum DownloadTaskEvent {
 
-    case progress(Float)
+    case progress(Double)
     case done(UIImage)
 }
 
@@ -20,11 +20,18 @@ class DownloadTask{
     
     let taskID:Int
     let avatar:Avatar
+    private (set) var updatedAt:Date!
     
     let eventSubj = PublishSubject<DownloadTaskEvent>()
+    
+    private let disposeBag = DisposeBag()
         
     init(taskID:Int, avatar:Avatar) {
         self.taskID = taskID
         self.avatar = avatar
+        updatedAt = Date()
+        eventSubj.asObservable().subscribe { [weak self] event in
+            self?.updatedAt = Date()
+        }.disposed(by: disposeBag)
     }
 }
