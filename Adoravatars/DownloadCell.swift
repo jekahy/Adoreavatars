@@ -29,7 +29,7 @@ class DownloadCell: UITableViewCell {
         progressView.progress = 0
 
         
-        task.eventSubj
+        task.events
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] event in
                 

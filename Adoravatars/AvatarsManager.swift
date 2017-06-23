@@ -33,53 +33,13 @@ class AvatarsManager:NSObject{
     private (set) lazy var downloadTasks:Observable<[DownloadTask]> = self.downloadsVar.asObservable()
     
     fileprivate let sessionDelegateObserver = URLSessionDownloadEventsObserver()
-    
-    private let disposeBag = DisposeBag()
-    
-    private override init()
-    {
-        super.init()
-        
-        sessionDelegateObserver.eventsSubject.subscribe(onNext: {[unowned self] sessionEvent in
-            
-            guard let dTask = self.retrieveTaskWithID(sessionEvent.task.taskIdentifier) else {
-                return
-            }
-            
-            switch sessionEvent.type {
-                
-            case .didWriteData(let progress):
-                
-                dTask.eventSubj.onNext(.progress(progress))
-                
-            case .didFinishDownloading(let location):
-                
-                guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
-                {
-                    dTask.eventSubj.onError(DownloadError.failed)
-                    return
-                }
-                self.cacheData(data, for: sessionEvent.task, cache: self.cache)
-                
-                dTask.eventSubj.onNext(.done(image))
-                dTask.eventSubj.onCompleted()
-                
-            case .didCompleteWithError( let error):
-                
-                if let error = error {
-                    dTask.eventSubj.onError(error)
-                }
-            }
-            
-        }).disposed(by: disposeBag)
-    }
-    
+    fileprivate lazy var sessionEventsObservable: Observable<SessionDownloadEvent> = self.sessionDelegateObserver.sessionEvents
     
     
     func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     {
         let task = startDownloadTask(for:avatar)
-        return task.eventSubj.asObservable()
+        return task.events
     }
     
     
@@ -95,7 +55,8 @@ class AvatarsManager:NSObject{
         let sessionTask = session.downloadTask(with: request)
         sessionTask.resume()
 
-        let downloadTask = DownloadTask(taskID: sessionTask.taskIdentifier, avatar: avatar)
+        let sessionObs = sessionObservable(for:sessionTask.taskIdentifier)
+        let downloadTask = DownloadTask(taskID: sessionTask.taskIdentifier, avatar: avatar, sessionObservable:sessionObs, cache:cache)
 
         if let idx = downloadsVar.value.index(where: {$0.avatar == avatar}){
             downloadsVar.value[idx] = downloadTask
@@ -125,18 +86,9 @@ extension AvatarsManager {
     }
     
     
-    fileprivate func retrieveTaskWithID(_ taskID:Int)->DownloadTask?
+    fileprivate func sessionObservable(for taskID:Int)->Observable<SessionDownloadEvent>
     {
-        return downloadsVar.value.first(where: {$0.taskID == taskID})
-    }
-    
-    
-    fileprivate func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)
-    {
-        if let response = task.response, let request = task.originalRequest{
-            let cached = CachedURLResponse(response: response, data: data)
-            cache.storeCachedResponse(cached, for: request)
-        }
+        return sessionEventsObservable.filter({$0.task.taskIdentifier == taskID})
     }
 
 }
