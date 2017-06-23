@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
-import RxSwiftExt
 
 class AvatarCell: UICollectionViewCell {
     
@@ -20,32 +18,10 @@ class AvatarCell: UICollectionViewCell {
     private var disposeBag = DisposeBag()
     private (set) var avatar:Avatar!
     
-    func configure(with avatar:Avatar, api:AvatarsManager)
-    {
-        disposeBag = DisposeBag()
-        toggleActivityIndicatorStatus(false)
-        imgView.image = nil
-
-        api.downloadAvatarImage(avatar)
-            .observeOn(MainScheduler.instance)
-            .unwrap()
-            .subscribe(onNext: {[weak self] image in
-                
-            self?.imgView.image = image
-            self?.toggleActivityIndicatorStatus(true)
-
-        }, onError: {[weak self] error in
-            
-            self?.toggleActivityIndicatorStatus(true)
-
-        }).disposed(by: disposeBag)
-        
-        textLabel.text = avatar.identifier
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.hidesWhenStopped = true
+        toggleActivityIndicatorStatus(false)
     }
     
     override func layoutSubviews() {
@@ -55,6 +31,37 @@ class AvatarCell: UICollectionViewCell {
         imgView.layer.cornerRadius = imgView.bounds.size.width/2
         imgView.layer.masksToBounds = true
     }
+    
+    func configure(with avatar:Avatar, api:AvatarsManager)
+    {
+        api.downloadAvatarImage(avatar)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] event in
+                
+                if case .done(let image) = event {
+                    self?.imgView.image = image
+                    self?.toggleActivityIndicatorStatus(true)
+                }
+                
+                }, onError: {[weak self] error in
+                    
+                    self?.toggleActivityIndicatorStatus(true)
+                    
+            }).disposed(by: disposeBag)
+        
+        textLabel.text = avatar.identifier
+    }
+    
+    
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        toggleActivityIndicatorStatus(false)
+        imgView.image = nil
+        
+    }
+    
     
     
     private func toggleActivityIndicatorStatus(_ stop:Bool)

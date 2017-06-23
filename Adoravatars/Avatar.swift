@@ -6,7 +6,12 @@
 //  Copyright © 2017 Eugene. All rights reserved.
 //
 
-struct Avatar{
+struct Avatar:Equatable{
     
     let identifier:String
+    
+    static func ==(lhs: Avatar, rhs: Avatar) -> Bool
+    {
+        return lhs.identifier == rhs.identifier
+    }
 }
