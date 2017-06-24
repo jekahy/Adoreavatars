@@ -16,7 +16,7 @@ class AvatarsVC: UIViewController {
     fileprivate let toDownloadsSegue = "toDownloadsVC"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let manager = AvatarsManager.shared
+    private let manager = AvatarsManager()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad()
@@ -24,24 +24,31 @@ class AvatarsVC: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Adoreavatars"
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        manager.getAvatars().bind(to: collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){ (index, avatar: Avatar, cell) in
+        manager.getAvatars().bind(to: collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){ [weak self](index, avatar: Avatar, cell) in
             
-            cell.configure(with: avatar, api: AvatarsManager.shared)
+            if let sSelf = self{
+                cell.configure(with: avatar, api: sSelf.manager)
+            }
             
         }.disposed(by: disposeBag)
         
         automaticallyAdjustsScrollViewInsets = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: self, action: #selector(networkButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem?.rx.tap.subscribe(onNext:{ [unowned self] _ in
+            
+            self.performSegue(withIdentifier: self.toDownloadsSegue, sender: nil)
+            
+        }).disposed(by: disposeBag)
     }
     
-    
-    @objc
-    private func networkButtonTapped ()
-    {
-        performSegue(withIdentifier: toDownloadsSegue, sender: nil)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == toDownloadsSegue, let downloadsVC = segue.destination as? DownloadsVC{
+            downloadsVC.manager = self.manager
+        }
     }
+}
 
-  }
 
 extension AvatarsVC:UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     

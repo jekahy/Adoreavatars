@@ -37,7 +37,6 @@ class DownloadTask{
             self.updatedAt = Date()
         }.disposed(by: disposeBag)
         
-     
         sessionObservable.subscribe(onNext: {[unowned self] sessionEvent in
             
            self.handleSessionEvent(sessionEvent, cache: cache)

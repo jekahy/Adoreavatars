@@ -16,7 +16,6 @@ class AvatarCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     
     private var disposeBag = DisposeBag()
-    private (set) var avatar:Avatar!
     
     override func awakeFromNib() {
         super.awakeFromNib()

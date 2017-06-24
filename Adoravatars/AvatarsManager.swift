@@ -13,18 +13,15 @@ enum DownloadError:Error {
     case failed
 }
 
-class AvatarsManager:NSObject{
+class AvatarsManager{
     
-    static let shared = AvatarsManager()
-    private static let mb = 1024*1024
-    fileprivate let baseUrl = "http://api.adorable.io/avatar/"
-    
-    fileprivate let cache = URLCache(memoryCapacity: 100*mb, diskCapacity: 0, diskPath: nil)
+    private let baseURL:URL
+    private let sessionConfig:URLSessionConfiguration
+    private let cache:URLCache
     
     private lazy var session:URLSession = {
         
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .returnCacheDataElseLoad
+        let config = self.sessionConfig
         config.urlCache = self.cache
         return URLSession(configuration: config, delegate: self.sessionDelegateObserver, delegateQueue: nil)
     }()
@@ -35,6 +32,14 @@ class AvatarsManager:NSObject{
     fileprivate let sessionDelegateObserver = URLSessionDownloadEventsObserver()
     fileprivate lazy var sessionEventsObservable: Observable<SessionDownloadEvent> = self.sessionDelegateObserver.sessionEvents
     
+    
+    
+    init(baseURL:URL=AvatarsManager.defaultBaseURL, sessionConfiguration:URLSessionConfiguration=AvatarsManager.defaultSessionConfiguration, cache:URLCache=AvatarsManager.defaultCache)
+    {
+        self.baseURL = baseURL
+        self.sessionConfig = sessionConfiguration
+        self.cache = cache
+    }
     
     func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     {
@@ -71,12 +76,9 @@ extension AvatarsManager {
 
     //    MARK: Helpers
 
-    fileprivate func urlForAvatarID(_ id:String)->URL
+    fileprivate func urlForAvatarID(_ id:String, baseURL:URL=AvatarsManager.defaultBaseURL)->URL
     {
-        var path = baseUrl + id
-        path = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        
-        return URL(string:path)!
+        return baseURL.appendingPathComponent(id)
     }
     
     fileprivate func urlRequestFor(_ avatar:Avatar)->URLRequest
@@ -96,9 +98,24 @@ extension AvatarsManager {
 
 extension AvatarsManager{
     
+    fileprivate static let mb = 1024*1024
+    
+    fileprivate static let defaultCache = URLCache(memoryCapacity: 100*mb, diskCapacity: 0, diskPath: nil)
+    
+    fileprivate static var defaultSessionConfiguration:URLSessionConfiguration{
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .returnCacheDataElseLoad
+        config.urlCache = AvatarsManager.defaultCache
+        return config
+    }
+    fileprivate static let defaultBaseURL = URL(string: "http://api.adorable.io/avatar")!
+
     static func defaultAvatars()->Observable<[Avatar]>
     {
         let avatars = ["Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Organa", "Owen Lars", "Beru Whitesun lars", "R5-D4", "Biggs Darklighter", "Obi-Wan Kenobi", "Anakin Skywalker", "Wilhuff Tarkin", "Chewbacca", "Han Solo", "Greedo", "Jabba Desilijic Tiure", "Wedge Antilles", "Jek Tono Porkins", "Yoda", "Palpatine", "Boba Fett", "IG-88", "Bossk", "Lando Calrissian", "Lobot", "Ackbar", "Mon Mothma", "Arvel Crynyd", "Wicket Systri Warrick", "Nien Nunb", "Qui-Gon Jinn", "Nute Gunray", "Finis Valorum", "Jar Jar Binks", "Roos Tarpals", "Rugor Nass", "Ric Olié", "Watto", "Sebulba", "Quarsh Panaka", "Shmi Skywalker", "Darth Maul", "Bib Fortuna", "Ayla Secura", "Dud Bolt", "Gasgano", "Ben Quadinaros", "Mace Windu", "Ki-Adi-Mundi", "Kit Fisto", "Eeth Koth", "Adi Gallia", "Saesee Tiin", "Yarael Poof", "Plo Koon", "Mas Amedda", "Gregar Typho", "Cordé", "Cliegg Lars", "Poggle the Lesser", "Luminara Unduli", "Barriss Offee", "Dormé", "Dooku", "Bail Prestor Organa", "Jango Fett", "Zam Wesell", "Dexter Jettster", "Lama Su", "Taun We", "Jocasta Nu", "Ratts Tyerell", "R4-P17", "Wat Tambor", "San Hill", "Shaak Ti", "Grievous", "Tarfful", "Raymus Antilles", "Sly Moore", "Tion Medon", "Finn", "Rey", "Poe Dameron", "BB8", "Captain Phasma", "Padmé Amidala"].map({Avatar(identifier:$0)})
         return Observable.just(avatars)
     }
+    
+    
+    
 }
