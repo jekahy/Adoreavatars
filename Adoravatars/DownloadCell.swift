@@ -28,26 +28,29 @@ class DownloadCell: UITableViewCell {
         statusLabel.text = "queued"
         progressView.progress = 0
 
-        
         task.events
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {[weak self] event in
+            .subscribe(onNext: { event in
                 
                 if case .progress(let progress) = event {
-                    self?.statusLabel.text = "in progress"
-                    self?.progressView.progress = Float(progress)
+                    self.statusLabel.text = "in progress"
+                    self.progressView.progress = Float(progress)
                 }
             
-            }, onError: { [weak self] _ in
+            }, onError: { _ in
             
-                self?.statusLabel.text = "failed"
-                self?.progressView.progress = 0
+                self.statusLabel.text = "failed"
+                self.progressView.progress = 0
             
-            }, onCompleted:{ [weak self] in
+            }, onCompleted:{
                 
-                self?.statusLabel.text = "done"
-                self?.progressView.progress = 1
+                self.statusLabel.text = "done"
+                self.progressView.progress = 1
                 
             }).disposed(by: disposeBag)
+        
+        task.events.observeOn(MainScheduler.instance).subscribe { [weak task] _ in
+            self.timeStampLabel.text = task?.updatedAt.string
+        }.disposed(by: disposeBag)
     }
 }

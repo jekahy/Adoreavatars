@@ -20,11 +20,11 @@ class DownloadTask{
     
     let taskID:Int
     let avatar:Avatar
-    
     private (set) var updatedAt = Date()
-    
+
     private let eventsSubj = PublishSubject<DownloadTaskEvent>()
-    private (set) lazy var events:Observable<DownloadTaskEvent> = self.eventsSubj.asObservable()
+    private (set) lazy var events:Observable<DownloadTaskEvent> = self.eventsSubj.asObservable().share()
+
     
     private let disposeBag = DisposeBag()
         
@@ -33,11 +33,11 @@ class DownloadTask{
         self.taskID = taskID
         self.avatar = avatar
 
-        eventsSubj.asObservable().subscribe { [unowned self] event in
-            self.updatedAt = Date()
+        events.subscribe { [weak self] _ in
+            self?.updatedAt = Date()
         }.disposed(by: disposeBag)
         
-        sessionObservable.subscribe(onNext: {[unowned self] sessionEvent in
+        sessionObservable.subscribe(onNext: { sessionEvent in
             
            self.handleSessionEvent(sessionEvent, cache: cache)
             
