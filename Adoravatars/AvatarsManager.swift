@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxSwiftExt
 
 enum DownloadError:Error {
     case failed
@@ -33,7 +34,6 @@ class AvatarsManager{
     fileprivate lazy var sessionEventsObservable: Observable<SessionDownloadEvent> = self.sessionDelegateObserver.sessionEvents
     
     
-    
     init(baseURL:URL=AvatarsManager.defaultBaseURL, sessionConfiguration:URLSessionConfiguration=AvatarsManager.defaultSessionConfiguration, cache:URLCache=AvatarsManager.defaultCache)
     {
         self.baseURL = baseURL
@@ -43,32 +43,47 @@ class AvatarsManager{
     
     func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     {
-        let task = startDownloadTask(for:avatar)
-        return task.events
+        if let task = self.downloadsVar.value.first(where: {$0.avatar == avatar}){
+            return task.events
+        }
+        
+        let taskEventsObservable = Observable.just(avatar)
+            .map({[weak self] avatar -> URLRequest? in
+                self?.urlRequestFor(avatar)})
+            .unwrap()
+            .map({[weak self] request -> URLSessionDownloadTask? in
+                guard let strSelf = self else{
+                    return nil
+                }
+                let sessionTask = strSelf.session.downloadTask(with: request)
+                sessionTask.resume()
+                return sessionTask
+            })
+            .unwrap()
+            .flatMap({[weak self] sessionTask -> Observable<SessionDownloadEvent> in
+                
+                self?.sessionObservable(for:sessionTask.taskIdentifier) ?? Observable.never()
+            })
+            .flatMap({[weak self] sessionEvent -> Observable<DownloadTaskEvent> in
+                
+                guard let strSelf = self else{
+                    return Observable.never()
+                }
+                return strSelf.handleSessionEvent(sessionEvent, cache: strSelf.cache)
+            })
+            .takeWhile({!$0.didComplete()})
+            .shareReplay(1)
+        
+        
+        let downloadTask = DownloadTask(avatar: avatar, eventsObservable:taskEventsObservable)
+        self.downloadsVar.value.append(downloadTask)
+        return taskEventsObservable
     }
     
     
     func getAvatars()->Observable<[Avatar]>
     {
         return AvatarsManager.defaultAvatars()
-    }
-    
-    private func startDownloadTask(for avatar:Avatar)->DownloadTask
-    {
-        let request = urlRequestFor(avatar)
-        
-        let sessionTask = session.downloadTask(with: request)
-        sessionTask.resume()
-
-        let sessionObs = sessionObservable(for:sessionTask.taskIdentifier)
-        let downloadTask = DownloadTask(taskID: sessionTask.taskIdentifier, avatar: avatar, sessionObservable:sessionObs, cache:cache)
-
-        if let idx = downloadsVar.value.index(where: {$0.avatar == avatar}){
-            downloadsVar.value[idx] = downloadTask
-        }else{
-            downloadsVar.value.append(downloadTask)
-        }
-        return downloadTask
     }
 }
 
@@ -91,6 +106,49 @@ extension AvatarsManager {
     fileprivate func sessionObservable(for taskID:Int)->Observable<SessionDownloadEvent>
     {
         return sessionEventsObservable.filter({$0.task.taskIdentifier == taskID})
+        
+    }
+    
+    
+    fileprivate func handleSessionEvent(_ sessionEvent:SessionDownloadEvent,  cache:URLCache)-> Observable<DownloadTaskEvent>
+    {
+        return Observable.create { [weak self] observer -> Disposable in
+            
+            switch sessionEvent.type {
+                
+            case .didWriteData(let progress):
+                
+                observer.onNext(.progress(progress))
+                
+            case .didFinishDownloading(let location):
+                
+                guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
+                {
+                    observer.onError(DownloadError.failed)
+                    break
+                }
+                self?.cacheData(data, for: sessionEvent.task, cache: cache)
+                observer.onNext(.done(image))
+                observer.onNext(.finish)
+                
+            case .didCompleteWithError( let error):
+                
+                if let error = error {
+                    observer.onError(error)
+                }
+                observer.onNext(.finish)
+            }
+            return Disposables.create()
+        }
+        
+    }
+    
+    fileprivate func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)
+    {
+        if let response = task.response, let request = task.originalRequest{
+            let cached = CachedURLResponse(response: response, data: data)
+            cache.storeCachedResponse(cached, for: request)
+        }
     }
 
 }
