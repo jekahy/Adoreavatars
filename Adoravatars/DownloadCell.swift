@@ -25,32 +25,30 @@ class DownloadCell: UITableViewCell {
     {
         disposeBag = DisposeBag()
         textLab.text = task.avatar.identifier
-        statusLabel.text = "queued"
+        statusLabel.text = task.status.rawValue
         progressView.progress = 0
 
         task.events
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { event in
+            .subscribe(onNext: {[weak self] event in
                 
                 if case .progress(let progress) = event {
-                    self.statusLabel.text = "in progress"
-                    self.progressView.progress = Float(progress)
+                    self?.progressView.progress = Float(progress)
                 }
             
-            }, onError: { _ in
+            }, onError: {[weak self] _ in
             
-                self.statusLabel.text = "failed"
-                self.progressView.progress = 0
+                self?.progressView.progress = 0
             
-            }, onCompleted:{
+            }, onCompleted:{ [weak self] in
                 
-                self.statusLabel.text = "done"
-                self.progressView.progress = 1
+                self?.progressView.progress = 1
                 
             }).disposed(by: disposeBag)
         
-        task.events.observeOn(MainScheduler.instance).subscribe { [weak task] _ in
-            self.timeStampLabel.text = task?.updatedAt.string
+        task.events.observeOn(MainScheduler.instance).subscribe { [weak task, weak self] _ in
+            self?.timeStampLabel.text = task?.updatedAt.string
+            self?.statusLabel.text = task?.status.rawValue
         }.disposed(by: disposeBag)
     }
 }
