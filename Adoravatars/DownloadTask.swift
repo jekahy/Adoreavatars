@@ -8,7 +8,7 @@
 
 import RxSwift
 
-enum DownloadTaskEvent:CustomStringConvertible {
+enum DownloadTaskEvent {
 
     case progress(Double)
     case done(UIImage)
@@ -20,22 +20,22 @@ enum DownloadTaskEvent:CustomStringConvertible {
         default:      return false
         }
     }
-    
-    var description: String {
-        
-        switch self {
-        case .progress: return "in progress"
-        default:        return "done"
-        }
-    }
 }
 
 
 class DownloadTask {
     
+    enum DownloadTaskStatus:String {
+        case queued = "queued"
+        case inProgress = "in progress"
+        case done = "done"
+        case failed = "failed"
+    }
+    
     let avatar:Avatar
     let events:Observable<DownloadTaskEvent>
     private (set) var updatedAt = Date()
+    private (set) var status = DownloadTaskStatus.queued
 
     private let disposeBag = DisposeBag()
         
@@ -43,8 +43,16 @@ class DownloadTask {
         
         self.avatar = avatar
         self.events = eventsObservable
-        events.subscribe { [weak self] _ in
+        events.subscribe { [weak self] event in
             self?.updatedAt = Date()
+            switch event {
+            case .completed:    self?.status = .done
+            case .error:        self?.status = .failed
+            case .next(let downoadEvent):
+                if case .progress = downoadEvent{
+                    self?.status = .inProgress
+                }
+            }
         }.disposed(by: disposeBag)
     }
 }
