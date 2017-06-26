@@ -19,16 +19,18 @@ class DownloadsVC: UIViewController {
     
     fileprivate let disposeBag = DisposeBag()
     
-    weak var manager:AvatarsManager?
+    var viewModel:DownloadsVMType!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
 
-        manager?.downloadTasks.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: DownloadCell.self))
-        { (index, task: DownloadTask, cell) in
-            cell.configureWithTask(task)
+        viewModel.downloadTasks.drive(tableView.rx.items(cellIdentifier: cellIdentifier, cellType: DownloadCell.self))
+        { (index, downloadTask: DownloadTask, cell) in
+            
+            let downloadVM = DownloadVM(downloadTask)
+            cell.configureWith(downloadVM)
             
             }.addDisposableTo(disposeBag)
     }

@@ -33,7 +33,7 @@ class DownloadTask {
     }
     
     let avatar:Avatar
-    let events:Observable<DownloadTaskEvent>
+    private (set) var events:Observable<DownloadTaskEvent>
     private (set) var updatedAt = Date()
     private (set) var status = DownloadTaskStatus.queued
 
@@ -43,16 +43,19 @@ class DownloadTask {
         
         self.avatar = avatar
         self.events = eventsObservable
-        events.subscribe { [weak self] event in
+        self.events = eventsObservable.do(onNext: { [weak self] downoadEvent in
             self?.updatedAt = Date()
-            switch event {
-            case .completed:    self?.status = .done
-            case .error:        self?.status = .failed
-            case .next(let downoadEvent):
-                if case .progress = downoadEvent{
-                    self?.status = .inProgress
-                }
+            switch downoadEvent{
+                case .progress: self?.status = .inProgress
+                default:        self?.status = .done
             }
-        }.disposed(by: disposeBag)
+            
+        }, onError: { [weak self] _ in
+            self?.updatedAt = Date()
+            self?.status = .failed
+        }, onCompleted: { [weak self] in
+            self?.status = .done
+        })
+        
     }
 }

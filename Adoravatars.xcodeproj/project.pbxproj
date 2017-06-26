@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		74F8E9CDC7A4251E60203882 /* Pods_Adoravatars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */; };
 		E13101201EFE65520051151E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131011F1EFE65520051151E /* DateExtensions.swift */; };
+		E14D1B5D1F0008650003F9B0 /* AvatarsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */; };
+		E14D1B5F1F000A370003F9B0 /* AvatarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */; };
+		E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33D1F00159C009C891A /* DownloadsVM.swift */; };
+		E168A3401F00164D009C891A /* DownloadVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33F1F00164D009C891A /* DownloadVM.swift */; };
 		E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */; };
 		E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */; };
 		E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163321EFA99CA0083496E /* AvatarCell.swift */; };
@@ -29,6 +33,10 @@
 		19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adoravatars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.release.xcconfig"; sourceTree = "<group>"; };
 		E131011F1EFE65520051151E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVM.swift; sourceTree = "<group>"; };
+		E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVM.swift; sourceTree = "<group>"; };
+		E168A33D1F00159C009C891A /* DownloadsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVM.swift; sourceTree = "<group>"; };
+		E168A33F1F00164D009C891A /* DownloadVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVM.swift; sourceTree = "<group>"; };
 		E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDownloadEventsObserver.swift; sourceTree = "<group>"; };
 		E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDownloadEvent.swift; sourceTree = "<group>"; };
 		E19163321EFA99CA0083496E /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
@@ -83,6 +91,17 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		E14D1B5B1F0008180003F9B0 /* VIew Models */ = {
+			isa = PBXGroup;
+			children = (
+				E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */,
+				E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */,
+				E168A33D1F00159C009C891A /* DownloadsVM.swift */,
+				E168A33F1F00164D009C891A /* DownloadVM.swift */,
+			);
+			name = "VIew Models";
+			sourceTree = "<group>";
+		};
 		E186B2381EFBF986008EF533 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +145,9 @@
 				E13101211EFE663D0051151E /* RxURLSessionDownloadDelegate */,
 				E19163361EFA9D760083496E /* AvatarsManager.swift */,
 				E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */,
-				E13101221EFE66600051151E /* Models */,
 				E186B2391EFBF992008EF533 /* Cells */,
+				E13101221EFE66600051151E /* Models */,
+				E14D1B5B1F0008180003F9B0 /* VIew Models */,
 				E186B2381EFBF986008EF533 /* Controllers */,
 				E1A0C03A1EFA9782003393D9 /* Main.storyboard */,
 				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
@@ -272,12 +292,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */,
+				E14D1B5F1F000A370003F9B0 /* AvatarVM.swift in Sources */,
 				E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */,
 				E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */,
 				E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */,
 				E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */,
 				E13101201EFE65520051151E /* DateExtensions.swift in Sources */,
+				E168A3401F00164D009C891A /* DownloadVM.swift in Sources */,
 				E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */,
+				E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */,
+				E14D1B5D1F0008650003F9B0 /* AvatarsVM.swift in Sources */,
 				E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */,
 				E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */,
 				E19163351EFA9D0A0083496E /* Avatar.swift in Sources */,

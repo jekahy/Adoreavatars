@@ -16,20 +16,21 @@ class AvatarsVC: UIViewController {
     fileprivate let toDownloadsSegue = "toDownloadsVC"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let manager = AvatarsManager()
+    private let viewModel:AvatarsVMType = AvatarsVM()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        navigationItem.title = "Adoreavatars"
+        
+        viewModel.title.drive(navigationItem.rx.title).disposed(by: disposeBag)
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        manager.getAvatars().bind(to: collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){ [weak self](index, avatar: Avatar, cell) in
+        viewModel.avatars.drive(collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){
+            [unowned self](index, avatar: Avatar, cell) in
             
-            if let sSelf = self{
-                cell.configure(with: avatar, api: sSelf.manager)
-            }
-            
+            let avatarVM = AvatarVM(avatar, api: self.viewModel.api)
+            cell.configure(with: avatarVM)
+
         }.disposed(by: disposeBag)
         
         automaticallyAdjustsScrollViewInsets = false
@@ -44,7 +45,7 @@ class AvatarsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == toDownloadsSegue, let downloadsVC = segue.destination as? DownloadsVC{
-            downloadsVC.manager = self.manager
+            downloadsVC.viewModel = viewModel.downloadsVM()
         }
     }
 }
