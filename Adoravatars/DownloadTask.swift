@@ -37,25 +37,29 @@ class DownloadTask {
     private (set) var updatedAt = Date()
     private (set) var status = DownloadTaskStatus.queued
 
+    
     private let disposeBag = DisposeBag()
         
     init(avatar:Avatar, eventsObservable:Observable<DownloadTaskEvent>) {
         
         self.avatar = avatar
         self.events = eventsObservable
-        self.events = eventsObservable.do(onNext: { [weak self] downoadEvent in
-            self?.updatedAt = Date()
-            switch downoadEvent{
-                case .progress: self?.status = .inProgress
-                default:        self?.status = .done
-            }
+        self.events.subscribe(onNext: { [weak self] downoadEvent in
             
-        }, onError: { [weak self] _ in
-            self?.updatedAt = Date()
-            self?.status = .failed
-        }, onCompleted: { [weak self] in
-            self?.status = .done
-        })
+                self?.updatedAt = Date()
+                switch downoadEvent{
+                    case .progress: self?.status = .inProgress
+                    default:        self?.status = .done
+                }
+
+            }, onError: {[weak self] _ in
+                self?.updatedAt = Date()
+                self?.status = .failed
+            
+            }, onCompleted: {  [weak self] in
+                self?.status = .done
+            
+        }).disposed(by: disposeBag)
         
     }
 }
