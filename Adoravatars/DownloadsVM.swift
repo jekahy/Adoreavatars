@@ -11,18 +11,23 @@ import RxCocoa
 
 protocol DownloadsVMType {
     
-    var downloadTasks:Driver<[DownloadTask]>{get}
+    var downloadTasks:Driver<[DownloadTaskType]>{get}
 }
 
 
-class DownloadsVM:DownloadsVMType {
+class DownloadsVM:DownloadsVMType, Equatable {
     
-    let downloadTasks:Driver<[DownloadTask]>
+    let downloadTasks:Driver<[DownloadTaskType]>
     let api:AvatarsProvider
     
     init(api:AvatarsProvider) {
         self.api = api
         downloadTasks = api.downloadTasks.asDriver(onErrorJustReturn: [])
         
+    }
+
+    static func ==(lhs: DownloadsVM, rhs: DownloadsVM) -> Bool
+    {
+        return lhs.api === rhs.api
     }
 }

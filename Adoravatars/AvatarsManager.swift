@@ -14,9 +14,9 @@ enum DownloadError:Error {
     case failed
 }
 
-protocol AvatarsProvider {
+protocol AvatarsProvider:class {
     
-    var downloadTasks:Observable<[DownloadTask]>{get}
+    var downloadTasks:Observable<[DownloadTaskType]>{get}
     func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
     func getAvatars()->Observable<[Avatar]>
 }
@@ -34,8 +34,8 @@ class AvatarsManager: AvatarsProvider{
         return URLSession(configuration: config, delegate: self.sessionDelegateObserver, delegateQueue: nil)
     }()
     
-    fileprivate let downloadsVar = Variable<[DownloadTask]>([])
-    private (set) lazy var downloadTasks:Observable<[DownloadTask]> = self.downloadsVar.asObservable()
+    fileprivate let downloadsVar = Variable<[DownloadTaskType]>([])
+    private (set) lazy var downloadTasks:Observable<[DownloadTaskType]> = self.downloadsVar.asObservable()
     
     fileprivate let sessionDelegateObserver = URLSessionDownloadEventsObserver()
     fileprivate lazy var sessionEventsObservable: Observable<SessionDownloadEvent> = self.sessionDelegateObserver.sessionEvents

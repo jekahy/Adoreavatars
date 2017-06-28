@@ -27,7 +27,7 @@ class DownloadsVC: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
 
         viewModel.downloadTasks.drive(tableView.rx.items(cellIdentifier: cellIdentifier, cellType: DownloadCell.self))
-        { (index, downloadTask: DownloadTask, cell) in
+        { (index, downloadTask: DownloadTaskType, cell) in
             
             let downloadVM = DownloadVM(downloadTask)
             cell.configureWith(downloadVM)

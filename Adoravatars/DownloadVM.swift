@@ -27,7 +27,7 @@ class DownloadVM:DownloadVMType {
     
     private let disposeBag = DisposeBag()
     
-    init(_ task:DownloadTask) {
+    init(_ task:DownloadTaskType) {
 
         title = Driver.just(task.avatar.identifier)
 

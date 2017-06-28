@@ -29,6 +29,8 @@
 		E1A0C03E1EFA9782003393D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03D1EFA9782003393D9 /* Assets.xcassets */; };
 		E1A0C0411EFA9782003393D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */; };
 		E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */; };
+		E1B92D9B1F0410190078E122 /* AvatarsManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D9A1F0410190078E122 /* AvatarsManagerMock.swift */; };
+		E1B92D9D1F0411850078E122 /* DownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D9C1F0411850078E122 /* DownloadTaskMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		E1A0C0401EFA9782003393D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1A0C0421EFA9782003393D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVMTests.swift; sourceTree = "<group>"; };
+		E1B92D9A1F0410190078E122 /* AvatarsManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarsManagerMock.swift; path = Adoravatars/Mocks/AvatarsManagerMock.swift; sourceTree = SOURCE_ROOT; };
+		E1B92D9C1F0411850078E122 /* DownloadTaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadTaskMock.swift; path = Adoravatars/Mocks/DownloadTaskMock.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 		E1A0C0351EFA9782003393D9 /* Adoravatars */ = {
 			isa = PBXGroup;
 			children = (
+				E1B92D961F040F470078E122 /* Mocks */,
 				E1A0C0361EFA9782003393D9 /* AppDelegate.swift */,
 				E13101211EFE663D0051151E /* RxURLSessionDownloadDelegate */,
 				E19163361EFA9D760083496E /* AvatarsManager.swift */,
@@ -198,6 +203,16 @@
 			);
 			path = Adoravatars;
 			sourceTree = "<group>";
+		};
+		E1B92D961F040F470078E122 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E1B92D9A1F0410190078E122 /* AvatarsManagerMock.swift */,
+				E1B92D9C1F0411850078E122 /* DownloadTaskMock.swift */,
+			);
+			name = Mocks;
+			path = AdoravatarsTests;
+			sourceTree = SOURCE_ROOT;
 		};
 		FE66DFF6527F0D3269CD66E5 /* Pods */ = {
 			isa = PBXGroup;
@@ -425,6 +440,7 @@
 			files = (
 				E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */,
 				E14D1B5F1F000A370003F9B0 /* AvatarVM.swift in Sources */,
+				E1B92D9D1F0411850078E122 /* DownloadTaskMock.swift in Sources */,
 				E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */,
 				E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */,
 				E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */,
@@ -433,6 +449,7 @@
 				E168A3401F00164D009C891A /* DownloadVM.swift in Sources */,
 				E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */,
 				E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */,
+				E1B92D9B1F0410190078E122 /* AvatarsManagerMock.swift in Sources */,
 				E14D1B5D1F0008650003F9B0 /* AvatarsVM.swift in Sources */,
 				E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */,
 				E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */,

@@ -22,8 +22,16 @@ enum DownloadTaskEvent {
     }
 }
 
+protocol DownloadTaskType {
+    
+    var avatar:Avatar{get}
+    var events:Observable<DownloadTaskEvent>{get}
+    var updatedAt:Date{get}
+    var status:DownloadTask.DownloadTaskStatus{get}
+}
 
-class DownloadTask {
+
+class DownloadTask:DownloadTaskType {
     
     enum DownloadTaskStatus:String {
         case queued = "queued"
@@ -37,7 +45,6 @@ class DownloadTask {
     private (set) var updatedAt = Date()
     private (set) var status = DownloadTaskStatus.queued
 
-    
     private let disposeBag = DisposeBag()
         
     init(avatar:Avatar, eventsObservable:Observable<DownloadTaskEvent>) {
