@@ -27,9 +27,9 @@ class AvatarVM:AvatarVMType  {
     let loading:Driver<Bool>
     let image:Driver<UIImage?>
     
-    private let api:AvatarsManager
+    private let api:AvatarsProvider
     
-    init(_ avatar:Avatar, api: AvatarsManager) {
+    init(_ avatar:Avatar, api: AvatarsProvider) {
         
         self.api = api
         self.avatar = avatar

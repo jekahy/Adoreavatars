@@ -18,9 +18,9 @@ protocol DownloadsVMType {
 class DownloadsVM:DownloadsVMType {
     
     let downloadTasks:Driver<[DownloadTask]>
-    let api:AvatarsManager
+    let api:AvatarsProvider
     
-    init(api:AvatarsManager) {
+    init(api:AvatarsProvider) {
         self.api = api
         downloadTasks = api.downloadTasks.asDriver(onErrorJustReturn: [])
         

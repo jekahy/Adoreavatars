@@ -44,6 +44,7 @@ class DownloadTask {
         
         self.avatar = avatar
         self.events = eventsObservable
+        
         self.events.subscribe(onNext: { [weak self] downoadEvent in
             
                 self?.updatedAt = Date()

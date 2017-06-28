@@ -45,7 +45,7 @@ class AvatarsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == toDownloadsSegue, let downloadsVC = segue.destination as? DownloadsVC{
-            downloadsVC.viewModel = viewModel.downloadsVM()
+            downloadsVC.viewModel = viewModel.downloadsVM
         }
     }
 }

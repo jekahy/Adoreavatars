@@ -14,7 +14,14 @@ enum DownloadError:Error {
     case failed
 }
 
-class AvatarsManager{
+protocol AvatarsProvider {
+    
+    var downloadTasks:Observable<[DownloadTask]>{get}
+    func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
+    func getAvatars()->Observable<[Avatar]>
+}
+
+class AvatarsManager: AvatarsProvider{
     
     private let baseURL:URL
     private let sessionConfig:URLSessionConfiguration
@@ -64,6 +71,11 @@ class AvatarsManager{
                 
                 self?.sessionObservable(for:sessionTask.taskIdentifier) ?? Observable.never()
             })
+            .do(onNext: {[weak self] sessionEvent in
+                if let strSelf = self, case .didFinishDownloading(let data) = sessionEvent.type{
+                    strSelf.cacheData(data, for: sessionEvent.task, cache: strSelf.cache)
+                }
+            })
             .flatMap({[weak self] sessionEvent -> Observable<DownloadTaskEvent> in
                 
                 guard let strSelf = self else{
@@ -112,7 +124,7 @@ extension AvatarsManager {
     
     fileprivate func handleSessionEvent(_ sessionEvent:SessionDownloadEvent,  cache:URLCache)-> Observable<DownloadTaskEvent>
     {
-        return Observable.create { [weak self] observer -> Disposable in
+        return Observable.create { observer -> Disposable in
             
             switch sessionEvent.type {
                 
@@ -120,14 +132,13 @@ extension AvatarsManager {
                 
                 observer.onNext(.progress(progress))
                 
-            case .didFinishDownloading(let location):
+            case .didFinishDownloading(let data):
                 
-                guard let data = try? Data(contentsOf: location), let image = UIImage(data: data) else
+                guard let image = UIImage(data: data) else
                 {
                     observer.onError(DownloadError.failed)
                     break
                 }
-                self?.cacheData(data, for: sessionEvent.task, cache: cache)
                 observer.onNext(.done(image))
                 observer.onNext(.finish)
                 

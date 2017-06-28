@@ -33,7 +33,7 @@ class DownloadVM:DownloadVMType {
 
         status = task.events.map({ downloadEvent -> String in
             return task.status.rawValue
-        }).startWith(DownloadTask.DownloadTaskStatus.queued.rawValue).debug().asDriver(onErrorJustReturn: "")
+        }).startWith(DownloadTask.DownloadTaskStatus.queued.rawValue).asDriver(onErrorJustReturn: "")
         
         timestamp = task.events.map({ downloadEvent -> String in
             return task.updatedAt.string
