@@ -6,6 +6,8 @@
 //  Copyright © 2017 Eugene. All rights reserved.
 //
 
+@testable import Adoravatars
+
 import RxSwift
 
 class DownloadTaskMock: DownloadTaskType {

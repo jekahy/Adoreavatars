@@ -15,10 +15,9 @@ import RxSwift
 
 class AvatarsVMTests: XCTestCase {
     
-    var scheduler: TestScheduler!
     var subscription: Disposable!
     
-    let manager = AvatarsManagerMock()
+    let manager = AvatarsManagerStubbed()
     var vm:AvatarsVMType!
 
 
@@ -26,8 +25,16 @@ class AvatarsVMTests: XCTestCase {
         
         super.setUp()
         vm = AvatarsVM(api: manager)
-        scheduler = TestScheduler(initialClock: 0)
     }
+    
+    override func tearDown() {
+        
+        subscription?.dispose()
+        
+        super.tearDown()
+    }
+    
+//    MARK: Tests
     
     
     func testInitEmpty()
@@ -81,15 +88,6 @@ class AvatarsVMTests: XCTestCase {
         let expected = DownloadsVM(api: manager)
         let res = vm.downloadsVM as! DownloadsVM
         XCTAssertEqual(expected, res)
-    }
-    
-    
-    override func tearDown() {
-        
-        scheduler.scheduleAt(1000) { 
-            self.subscription?.dispose()
-        }
-        super.tearDown()
     }
     
     

@@ -1,14 +1,16 @@
 //
-//  AvatarsManagerMock.swift
+//  AvatarsManagerStubbed.swift
 //  Adoravatars
 //
 //  Created by Eugene on 28.06.17.
 //  Copyright © 2017 Eugene. All rights reserved.
 //
 
+@testable import Adoravatars
+
 import RxSwift
 
-class AvatarsManagerMock: AvatarsProvider {
+class AvatarsManagerStubbed: AvatarsProvider {
     
     lazy var downloadTasks: Observable<[DownloadTaskType]> = Observable.just([self.defaultTask])
     
@@ -19,11 +21,25 @@ class AvatarsManagerMock: AvatarsProvider {
     let defaultEvents = Observable.just(DownloadTaskEvent.finish)
     let defaultUpdateDate = Date()
     let defaultStatus = DownloadTask.DownloadTaskStatus.done
-    
+    let defaultImage = UIImage(named: "test_icon")!
+    lazy var defaultDownloadEvents:[DownloadTaskEvent] = [.progress(0.5), .done(self.defaultImage)]
     
     func downloadAvatarImage(_ avatar: Avatar) -> Observable<DownloadTaskEvent> {
         
-        return Observable.just(DownloadTaskEvent.done(UIImage(named: "test_icon")!))
+        return Observable<DownloadTaskEvent>.create({ observer -> Disposable in
+            
+            for e in self.defaultDownloadEvents{
+                observer.onNext(e)
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        })
+    }
+    
+    
+    func downloadAvatarImageWithError(_ avatar: Avatar) -> Observable<DownloadTaskEvent> {
+        
+        return Observable.error(DownloadError.failed)
     }
     
     func getAvatars() -> Observable<[Avatar]> {

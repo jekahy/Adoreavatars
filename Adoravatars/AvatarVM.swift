@@ -20,19 +20,14 @@ protocol AvatarVMType:class {
 
 class AvatarVM:AvatarVMType  {
     
-    private let avatar:Avatar
     private let disposeBag = DisposeBag()
     
     let title:Driver<String>
     let loading:Driver<Bool>
     let image:Driver<UIImage?>
     
-    private let api:AvatarsProvider
     
     init(_ avatar:Avatar, api: AvatarsProvider) {
-        
-        self.api = api
-        self.avatar = avatar
         
         title = Driver.just(avatar.identifier)
 
