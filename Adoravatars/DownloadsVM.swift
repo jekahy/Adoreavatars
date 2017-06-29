@@ -15,17 +15,20 @@ protocol DownloadsVMType {
 }
 
 
-class DownloadsVM:DownloadsVMType, Equatable {
+class DownloadsVM:DownloadsVMType {
     
     let downloadTasks:Driver<[DownloadTaskType]>
     let api:AvatarsProvider
     
     init(api:AvatarsProvider) {
-        self.api = api
         downloadTasks = api.downloadTasks.asDriver(onErrorJustReturn: [])
-        
+        self.api = api
     }
+}
 
+
+extension DownloadsVM:Equatable{
+    
     static func ==(lhs: DownloadsVM, rhs: DownloadsVM) -> Bool
     {
         return lhs.api === rhs.api

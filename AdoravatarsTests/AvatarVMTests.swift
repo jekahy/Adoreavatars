@@ -40,43 +40,14 @@ class AvatarVMTests: XCTestCase {
         let avatar = Avatar(identifier: expected)
         vm = AvatarVM(avatar, api: manager)
         
-        let promise = expectation(description: "title test")
-        
-        var result:String?
-        subscription = vm.title.drive(onNext: { titleStr in
-            result = titleStr
-            
-        }, onCompleted:{
-            promise.fulfill()
-        })
-        waitForExpectations(timeout: 0.1, handler: nil)
-        guard let res = result else {
-            XCTFail()
-            return
-        }
-        XCTAssertEqual(expected, res)
+        subscription = performDriverVariableTest(expected: expected, driverToTest: vm.title, title: #function)
     }
     
     func testImage()
     {
         let expected = manager.defaultImage
-        
-        let promise = expectation(description: "image test")
-        
-        var result:UIImage?
-        subscription = vm.image.drive(onNext: { image in
-            
-            result = image
-            
-        }, onCompleted:{
-            promise.fulfill()
-        })
-        waitForExpectations(timeout: 0.1, handler: nil)
-        guard let res = result else {
-            XCTFail()
-            return
-        }
-        XCTAssertEqual(expected, res)
+        subscription = performDriverVariableTest(expected: expected, driverToTest: vm.image, title: #function)
+
     }
     
     

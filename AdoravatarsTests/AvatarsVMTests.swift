@@ -9,6 +9,7 @@
 import XCTest
 import RxTest
 import RxSwift
+import RxCocoa
 
 @testable import Adoravatars
 
@@ -50,37 +51,15 @@ class AvatarsVMTests: XCTestCase {
     
     func testAvatars()
     {
-        let promise = expectation(description: "avatars test")
         let expected = [manager.defaultAvatar]
-        var result:[Avatar]?
-        subscription = vm.avatars.drive(onNext: { avatars in
-            result = avatars
-            promise.fulfill()
-        })
-        waitForExpectations(timeout: 0.1, handler: nil)
-        guard let res = result else {
-            XCTFail()
-            return
-        }
-        XCTAssertEqual(expected, res)
+        subscription = performDriverArrayTest(expected: expected, driverToTest: vm.avatars, title: #function)
     }
     
     
     func testTitle()
     {
-        let promise = expectation(description: "title test")
         let expected = "Adoreavatars"
-        var result:String?
-        subscription = vm.title.drive(onNext: { titleStr in
-            result = titleStr
-            promise.fulfill()
-        })
-        waitForExpectations(timeout: 0.1, handler: nil)
-        guard let res = result else {
-            XCTFail()
-            return
-        }
-        XCTAssertEqual(expected, res)
+        subscription = performDriverVariableTest(expected: expected, driverToTest: vm.title, title:#function)
     }
     
     func testDownloadsVM()
@@ -91,4 +70,8 @@ class AvatarsVMTests: XCTestCase {
     }
     
     
+        
+    
 }
+
+

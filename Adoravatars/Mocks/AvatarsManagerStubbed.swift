@@ -14,11 +14,10 @@ class AvatarsManagerStubbed: AvatarsProvider {
     
     lazy var downloadTasks: Observable<[DownloadTaskType]> = Observable.just([self.defaultTask])
     
-    lazy var defaultTask:DownloadTaskType = DownloadTaskMock(avatar: self.defaultAvatar, events: self.defaultEvents, updatedAt: self.defaultUpdateDate, status: self.defaultStatus)
-    
+    lazy var defaultTask:DownloadTaskType = DownloadTask(avatar: self.defaultAvatar, eventsObservable: self.defaultEventsObservable)
     
     let defaultAvatar = Avatar(identifier: "default")
-    let defaultEvents = Observable.just(DownloadTaskEvent.finish)
+    lazy var defaultEventsObservable:Observable<DownloadTaskEvent> = Observable.from(self.defaultDownloadEvents)
     let defaultUpdateDate = Date()
     let defaultStatus = DownloadTask.DownloadTaskStatus.done
     let defaultImage = UIImage(named: "test_icon")!

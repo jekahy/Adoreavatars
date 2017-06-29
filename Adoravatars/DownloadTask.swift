@@ -71,3 +71,14 @@ class DownloadTask:DownloadTaskType {
         
     }
 }
+
+
+extension DownloadTask:Equatable {
+    
+    
+    static func ==(lhs: DownloadTask, rhs: DownloadTask) -> Bool
+    {
+        return lhs.avatar == rhs.avatar
+    }
+}
+

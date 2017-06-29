@@ -23,17 +23,25 @@ class AvatarsVM:AvatarsVMType {
     let avatars:Driver<[Avatar]>
     let title: Driver<String>
     
-    private let disposeBag = DisposeBag()
     let api:AvatarsProvider
     
-    private (set) lazy var downloadsVM: DownloadsVMType = DownloadsVM(api: self.api)
+    let downloadsVM: DownloadsVMType
     
     
     init(api:AvatarsProvider = AvatarsManager()){
         
-        self.api = api
         avatars = api.getAvatars().asDriver(onErrorJustReturn:[])
         title = Observable.just("Adoreavatars").asDriver(onErrorJustReturn: "")
+        downloadsVM = DownloadsVM(api: api)
+        self.api = api
     }
     
+}
+
+extension AvatarsVM:Equatable{
+    
+    static func ==(lhs: AvatarsVM, rhs: AvatarsVM) -> Bool
+    {
+        return lhs.api === rhs.api
+    }
 }
