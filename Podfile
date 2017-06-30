@@ -20,5 +20,5 @@ target 'AdoravatarsTests' do
 
 shared_pods
 pod 'RxTest'
-
+pod 'RxNimble'
 end

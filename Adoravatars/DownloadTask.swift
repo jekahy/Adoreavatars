@@ -8,19 +8,7 @@
 
 import RxSwift
 
-enum DownloadTaskEvent {
 
-    case progress(Double)
-    case done(UIImage)
-    case finish
-    
-    func didComplete()->Bool {
-        switch self {
-        case .finish: return true
-        default:      return false
-        }
-    }
-}
 
 protocol DownloadTaskType {
     
