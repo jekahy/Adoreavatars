@@ -31,14 +31,8 @@ class DownloadVM:DownloadVMType {
 
         title = Driver.just(task.avatar.identifier)
 
-        status = task.events.map({ downloadEvent -> String in
-            return task.status.rawValue
-        }).startWith(DownloadTask.DownloadTaskStatus.queued.rawValue).asDriver(onErrorJustReturn: "")
-        
-        timestamp = task.events.map({ downloadEvent -> String in
-            return task.updatedAt.string
-        }).startWith(Date().string).asDriver(onErrorJustReturn: "")
-        
+        status = task.status.map{$0.rawValue}.asDriver(onErrorJustReturn: "")
+        timestamp = task.updatedAt.map{$0.string}.asDriver(onErrorJustReturn: "")
         progress = task.events.map({ downloadEvent -> Float in
             switch downloadEvent {
             case .progress(let progress):   return Float(progress)

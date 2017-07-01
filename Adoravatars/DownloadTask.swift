@@ -14,14 +14,14 @@ protocol DownloadTaskType {
     
     var avatar:Avatar{get}
     var events:Observable<DownloadTaskEvent>{get}
-    var updatedAt:Date{get}
-    var status:DownloadTask.DownloadTaskStatus{get}
+    var updatedAt:Observable<Date>{get}
+    var status:Observable<DownloadTask.Status>{get}
 }
 
 
 class DownloadTask:DownloadTaskType {
     
-    enum DownloadTaskStatus:String {
+    enum Status:String {
         case queued = "queued"
         case inProgress = "in progress"
         case done = "done"
@@ -29,9 +29,13 @@ class DownloadTask:DownloadTaskType {
     }
     
     let avatar:Avatar
+    private let updatedAtSubj = BehaviorSubject<Date>(value: Date())
+    private let statusSubj = BehaviorSubject<Status>(value: .queued)
+    
+    
     private (set) var events:Observable<DownloadTaskEvent>
-    private (set) var updatedAt = Date()
-    private (set) var status = DownloadTaskStatus.queued
+    private (set) lazy var updatedAt:Observable<Date> = self.updatedAtSubj.asObservable()
+    private (set) lazy var status:Observable<Status> = self.statusSubj.asObservable()
 
     private let disposeBag = DisposeBag()
         
@@ -40,23 +44,22 @@ class DownloadTask:DownloadTaskType {
         self.avatar = avatar
         self.events = eventsObservable
         
-        self.events.subscribe(onNext: { [weak self] downoadEvent in
+        events.subscribe(onNext: { [weak self] downoadEvent in
             
-                self?.updatedAt = Date()
+                self?.updatedAtSubj.onNext(Date())
                 switch downoadEvent{
-                    case .progress: self?.status = .inProgress
-                    default:        self?.status = .done
+                    case .progress: self?.statusSubj.onNext(.inProgress)
+                    default:        self?.statusSubj.onNext(.done)
                 }
 
-            }, onError: {[weak self] _ in
-                self?.updatedAt = Date()
-                self?.status = .failed
+            }, onError: {[weak self] error in
+                self?.updatedAtSubj.onNext(Date())
+                self?.statusSubj.onNext(.failed)
             
             }, onCompleted: {  [weak self] in
-                self?.status = .done
+                self?.statusSubj.onNext(.done)
             
         }).disposed(by: disposeBag)
-        
     }
 }
 

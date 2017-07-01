@@ -35,6 +35,8 @@
 		E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */; };
 		E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */; };
 		E1B92DA91F05A1E80078E122 /* DownloadTaskEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */; };
+		E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */; };
+		E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
 		E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskEvent.swift; sourceTree = "<group>"; };
+		E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVMTests.swift; sourceTree = "<group>"; };
+		E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 				E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */,
 				E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */,
 				E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */,
+				E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */,
 				E16801091F0402A30026F269 /* AvatarTests.swift */,
 				E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */,
 				E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */,
@@ -221,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */,
+				E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */,
 			);
 			name = Fakes;
 			path = AdoravatarsTests;
@@ -441,12 +447,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */,
 				E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */,
 				E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */,
 				E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */,
 				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
 				E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */,
 				E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */,
+				E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */,
 				E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

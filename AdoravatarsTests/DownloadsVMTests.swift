@@ -40,7 +40,7 @@ class DownloadsVMTests: XCTestCase {
     func testDownloadTasksSet()
     {
         
-        let expected = [manager.defaultTask as! DownloadTask]
+        let expected = [manager.defaultTask]
         
         let observer = scheduler.createObserver(Array<DownloadTaskType>.self)
         
@@ -55,7 +55,7 @@ class DownloadsVMTests: XCTestCase {
                 }
                 return nil
             }.last
-        guard let res = result as? [DownloadTask] else {
+        guard let res = result as? [DownloadTaskMock] else {
             XCTFail()
             return
         }

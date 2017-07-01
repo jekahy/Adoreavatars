@@ -24,8 +24,9 @@ class DownloadTaskTests: XCTestCase {
     var scheduler: TestScheduler!
     
     let manager = AvatarsManagerStubbed()
-    let avatar = Avatar(identifier: "vaider")
     
+    let avatar = DownloadTaskMock.defaultAvatar
+
     var sut:DownloadTaskType!
     
     
@@ -40,7 +41,7 @@ class DownloadTaskTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sut = DownloadTask(avatar:avatar, eventsObservable:manager.defaultEventsObservable)
+        sut = DownloadTaskMock()
         scheduler = TestScheduler(initialClock: 0)
         
     }
@@ -56,7 +57,7 @@ class DownloadTaskTests: XCTestCase {
     
     func testInitAvatar()
     {
-        let expected = avatar
+        let expected = DownloadTaskMock.defaultAvatar
         XCTAssertEqual(expected, sut.avatar)
     }
     
@@ -70,29 +71,26 @@ class DownloadTaskTests: XCTestCase {
     
     func testUpdatedAtChanges()
     {
+        
         var testEvents = defaultTestEvents
         testEvents.append(error(300, DownloadError.failed))
 
         var res = [Bool]()
         let observable = scheduler.createColdObservable(testEvents)
+        
         sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
 
-        var previousDate = sut.updatedAt
+        subscription = sut.updatedAt.scan(Date()) { previousDate, currentDate in
+            res.append(previousDate != currentDate)
+            return currentDate
+        }.subscribe()
 
-        let promise = expectation(description: #function)
-        subscription = sut.events.subscribe(onNext: { _ in
-            
-            res.append(previousDate != self.sut.updatedAt)
-            previousDate = self.sut.updatedAt
-        }, onError:{ _ in
-            res.append(previousDate != self.sut.updatedAt)
-            promise.fulfill()
-        })
-        
+        scheduler.scheduleAt(350) { 
+            expect(res).to(equal([true, true, true, true]))
+        }
         scheduler.start()
 
-        waitForExpectations(timeout: 5, handler: nil)
-        expect(res).to(equal([true, true, true]))
+        
     }
     
     func testStatusOnNextOnErrorChanges()
@@ -100,46 +98,37 @@ class DownloadTaskTests: XCTestCase {
         var testEvents = defaultTestEvents
         testEvents.append(error(300, DownloadError.failed))
         
-        var res:[DownloadTask.DownloadTaskStatus] = []
         let observable = scheduler.createColdObservable(testEvents)
+        let observer = scheduler.createObserver(DownloadTask.Status.self)
+        
         sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
         
-        let promise = expectation(description: #function)
-        subscription = sut.events.subscribe(onNext: { _ in
-            
-            res.append(self.sut.status)
-            
-        }, onError:{ _ in
-            res.append(self.sut.status)
-            promise.fulfill()
-        })
+        subscription = sut.status.subscribe(observer)
+        
+        scheduler.scheduleAt(350) { 
+            XCTAssertEqual(observer.events, [next(0, .queued), next(100, .inProgress), next(200, .done), next(300, .failed)])
+        }
         
         scheduler.start()
         
-        waitForExpectations(timeout: 3, handler: nil)
-        expect(res).to(equal([.inProgress, .done, .failed]))
-        
     }
-    
+
     func testStatusOnComletedChanges()
     {
         let testEvents:[RecordedDTaskEvent] = [completed(100)]
         
-        var res:[DownloadTask.DownloadTaskStatus] = []
         let observable = scheduler.createColdObservable(testEvents)
+        let observer = scheduler.createObserver(DownloadTask.Status.self)
+        
         sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
         
-        let promise = expectation(description: #function)
-        subscription = sut.events.subscribe( onCompleted:{_ in
-            res.append(self.sut.status)
-            promise.fulfill()
-        })
+        subscription = sut.status.subscribe(observer)
+        
+        scheduler.scheduleAt(150) {
+            XCTAssertEqual(observer.events, [next(0, .queued), next(100, .done)])
+        }
         
         scheduler.start()
-        
-        waitForExpectations(timeout: 1, handler: nil)
-        expect(res).to(equal([.done]))
     }
-
 }
 
