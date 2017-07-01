@@ -12,7 +12,7 @@ import RxSwift
 
 class AvatarsVC: UIViewController {
 
-    fileprivate let cellIdentifier = "avatarCell"
+    let cellIdentifier = "avatarCell"
     fileprivate let toDownloadsSegue = "toDownloadsVC"
     @IBOutlet weak var collectionView: UICollectionView!
     

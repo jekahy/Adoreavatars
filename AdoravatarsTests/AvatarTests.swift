@@ -15,7 +15,6 @@ class AvatarTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
     }
     
     

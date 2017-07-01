@@ -6,26 +6,28 @@
 //  Copyright © 2017 Eugene. All rights reserved.
 //
 
-@testable import Adoravatars
 
 import RxSwift
 
+@testable import Adoravatars
+
 class AvatarsManagerStubbed: AvatarsProvider {
     
-    lazy var downloadTasks: Observable<[DownloadTaskType]> = Observable.just([self.defaultTask])
+    let downloadTasks:Observable<[DownloadTaskType]> = Observable.just([AvatarsManagerStubbed.defaultTask])
     
-    let defaultTask = DownloadTaskMock()
+    static let defaultTask = DownloadTaskMock()
+    static let defaultAvatar = Avatar(identifier: "default")
+    static let defaultImage = UIImage(named: "test_icon")!
     
-    let defaultAvatar = Avatar(identifier: "default")
-    let defaultImage = UIImage(named: "test_icon")!
+    static let defaultDownloadEvents:[DownloadTaskEvent] = [.progress(0.5), .done(AvatarsManagerStubbed.defaultImage)]
     
-    lazy var defaultDownloadEvents:[DownloadTaskEvent] = [.progress(0.5), .done(self.defaultImage)]
+    static let defaultEventsObservable = Observable.from(AvatarsManagerStubbed.defaultDownloadEvents)
     
     func downloadAvatarImage(_ avatar: Avatar) -> Observable<DownloadTaskEvent> {
         
         return Observable<DownloadTaskEvent>.create({ observer -> Disposable in
             
-            for e in self.defaultDownloadEvents{
+            for e in AvatarsManagerStubbed.defaultDownloadEvents{
                 observer.onNext(e)
             }
             observer.onCompleted()
@@ -41,6 +43,6 @@ class AvatarsManagerStubbed: AvatarsProvider {
     
     func getAvatars() -> Observable<[Avatar]> {
         
-        return Observable.just([defaultAvatar])
+        return Observable.just([AvatarsManagerStubbed.defaultAvatar])
     }
 }

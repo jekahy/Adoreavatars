@@ -10,13 +10,8 @@
 import XCTest
 import RxTest
 import RxSwift
-import RxCocoa
-import RxNimble
-import Nimble
-import RxSwiftExt
 
 @testable import Adoravatars
-
 
 class DownloadVMTests: XCTestCase {
     

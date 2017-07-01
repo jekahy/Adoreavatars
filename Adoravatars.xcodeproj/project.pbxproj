@@ -37,6 +37,8 @@
 		E1B92DA91F05A1E80078E122 /* DownloadTaskEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */; };
 		E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */; };
 		E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */; };
+		E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */; };
+		E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskEvent.swift; sourceTree = "<group>"; };
 		E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVMTests.swift; sourceTree = "<group>"; };
 		E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskMock.swift; sourceTree = "<group>"; };
+		E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCellTests.swift; sourceTree = "<group>"; };
+		E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVMMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,10 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				E1B92D961F040F470078E122 /* Fakes */,
-				E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */,
-				E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */,
-				E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */,
-				E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */,
+				E1C47AA21F07A66500D7A5FD /* Cells */,
+				E1C47AA11F07A3F400D7A5FD /* View Models */,
 				E16801091F0402A30026F269 /* AvatarTests.swift */,
 				E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */,
 				E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */,
@@ -214,8 +216,8 @@
 				E14D1B5B1F0008180003F9B0 /* VIew Models */,
 				E186B2381EFBF986008EF533 /* Controllers */,
 				E1A0C03A1EFA9782003393D9 /* Main.storyboard */,
-				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */,
+				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C0421EFA9782003393D9 /* Info.plist */,
 				E131011F1EFE65520051151E /* DateExtensions.swift */,
 			);
@@ -227,10 +229,30 @@
 			children = (
 				E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */,
 				E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */,
+				E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */,
 			);
 			name = Fakes;
 			path = AdoravatarsTests;
 			sourceTree = SOURCE_ROOT;
+		};
+		E1C47AA11F07A3F400D7A5FD /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */,
+				E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */,
+				E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */,
+				E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		E1C47AA21F07A66500D7A5FD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
 		};
 		FE66DFF6527F0D3269CD66E5 /* Pods */ = {
 			isa = PBXGroup;
@@ -453,7 +475,9 @@
 				E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */,
 				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
 				E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */,
+				E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */,
 				E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */,
+				E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */,
 				E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */,
 				E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */,
 			);

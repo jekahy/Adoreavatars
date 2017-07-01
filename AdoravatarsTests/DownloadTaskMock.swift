@@ -8,8 +8,6 @@
 
 import UIKit
 import RxSwift
-import RxNimble
-import Nimble
 
 @testable import Adoravatars
 

@@ -40,7 +40,7 @@ class DownloadsVMTests: XCTestCase {
     func testDownloadTasksSet()
     {
         
-        let expected = [manager.defaultTask]
+        let expected = [AvatarsManagerStubbed.defaultTask]
         
         let observer = scheduler.createObserver(Array<DownloadTaskType>.self)
         

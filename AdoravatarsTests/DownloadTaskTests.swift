@@ -10,8 +10,6 @@ import XCTest
 import RxTest
 import RxSwift
 import RxCocoa
-import RxNimble
-import Nimble
 
 @testable import Adoravatars
 
@@ -32,7 +30,7 @@ class DownloadTaskTests: XCTestCase {
     
     var defaultTestEvents:[RecordedDTaskEvent]  {
         var time = 0
-        return manager.defaultDownloadEvents.map{ event ->RecordedDTaskEvent in
+        return AvatarsManagerStubbed.defaultDownloadEvents.map{ event ->RecordedDTaskEvent in
             time = time + 100
             return next(time, event)
         }
@@ -41,7 +39,7 @@ class DownloadTaskTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sut = DownloadTaskMock()
+        sut = DownloadTask(avatar:avatar, eventsObservable:AvatarsManagerStubbed.defaultEventsObservable)
         scheduler = TestScheduler(initialClock: 0)
         
     }
@@ -64,8 +62,14 @@ class DownloadTaskTests: XCTestCase {
     
     func testInitEventsObservable()
     {
-        let res = sut.events
-        expect(res)==manager.defaultDownloadEvents.first
+        let observer = scheduler.createObserver(DownloadTaskEvent.self)
+        subscription = sut.events.subscribe(observer)
+        
+        let expected:[RecordedDTaskEvent] = [next(0, .progress(0.5)), next(0, .done(AvatarsManagerStubbed.defaultImage)), completed(0)]
+        
+        scheduler.start()
+
+        XCTAssertEqual(observer.events, expected)
     }
     
     
@@ -86,7 +90,7 @@ class DownloadTaskTests: XCTestCase {
         }.subscribe()
 
         scheduler.scheduleAt(350) { 
-            expect(res).to(equal([true, true, true, true]))
+             XCTAssertEqual(res, [true, true, true, true])
         }
         scheduler.start()
 
