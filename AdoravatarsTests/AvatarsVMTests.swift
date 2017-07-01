@@ -35,7 +35,7 @@ class AvatarsVMTests: XCTestCase {
         super.tearDown()
     }
     
-//    MARK: Tests
+    // MARK: Tests
     
     
     func testInitEmpty()

@@ -23,16 +23,6 @@ class DownloadVMTests: XCTestCase {
     let manager = AvatarsManagerStubbed()
     var vm:DownloadVMType!
     
-    
-    var defaultTestEvents:[RecordedE<DownloadTaskEvent>]  {
-        var time = 0
-        return DownloadTaskMock.defaultDownloadEvents.map{ event ->RecordedE<DownloadTaskEvent> in
-            time = time + 100
-            return next(time, event)
-        }
-    }
-    
-    
     override func setUp() {
         super.setUp()
         vm = DownloadVM(DownloadTaskMock())
@@ -47,7 +37,7 @@ class DownloadVMTests: XCTestCase {
         super.tearDown()
     }
 
-//    MARK: Tests
+    // MARK: Tests
     
     func testTitle()
     {

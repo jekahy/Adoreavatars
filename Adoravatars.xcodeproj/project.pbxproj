@@ -39,6 +39,7 @@
 		E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */; };
 		E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */; };
 		E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */; };
+		E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskMock.swift; sourceTree = "<group>"; };
 		E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCellTests.swift; sourceTree = "<group>"; };
 		E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVMMock.swift; sourceTree = "<group>"; };
+		E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCellTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */,
+				E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */,
 				E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */,
 				E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */,
+				E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */,
 				E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */,
 				E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */,
 			);

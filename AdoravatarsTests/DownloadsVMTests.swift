@@ -35,7 +35,7 @@ class DownloadsVMTests: XCTestCase {
         super.tearDown()
     }
     
-//    MARK: Tests
+    // MARK: Tests
     
     func testDownloadTasksSet()
     {

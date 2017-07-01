@@ -32,7 +32,7 @@ class AvatarVMTests: XCTestCase {
         super.tearDown()
     }
     
-//    MARK: Tests
+    // MARK: Tests
     
     func testTitle()
     {

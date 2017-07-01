@@ -102,7 +102,7 @@
         <!--DownloadsVC-->
         <scene sceneID="zhb-8f-EcP">
             <objects>
-                <viewController id="EF6-pZ-FgI" customClass="DownloadsVC" customModule="Adoravatars" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DownloadsVC" id="EF6-pZ-FgI" customClass="DownloadsVC" customModule="Adoravatars" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dfA-qJ-liZ"/>
                         <viewControllerLayoutGuide type="bottom" id="gF9-yV-3FQ"/>

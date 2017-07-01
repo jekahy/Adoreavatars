@@ -19,25 +19,13 @@ class AvatarCellTests: XCTestCase {
     
     
     var sut:AvatarCell!
-    
-    var subscription: Disposable?
-    var scheduler: TestScheduler!
 
     override func setUp() {
         super.setUp()
         sut = prepareCell()
-        scheduler = TestScheduler(initialClock: 0)
-
     }
     
-    override func tearDown() {
-        
-        subscription?.dispose()
-
-        super.tearDown()
-    }
-    
-//    MARK: Tests
+    // MARK: Tests
     
     func testActivityIndicatorNotNil()
     {
@@ -75,9 +63,8 @@ class AvatarCellTests: XCTestCase {
         let avatarVM = AvatarVMMock()
         sut.configure(with: avatarVM)
 
-        scheduler.scheduleAt(50) { 
-            XCTAssertEqual(self.sut.imgView.image, AvatarsManagerStubbed.defaultImage)
-        }
+        XCTAssertEqual(self.sut.imgView.image, AvatarsManagerStubbed.defaultImage)
+
     }
     
     func testConfigureLoadingConnected()
@@ -99,12 +86,12 @@ class AvatarCellTests: XCTestCase {
         let avatarVM = AvatarVMMock()
         sut.configure(with: avatarVM)
         
-        scheduler.scheduleAt(50) {
-            
-            XCTAssertEqual(self.sut.textLabel.text, AvatarsManagerStubbed.defaultAvatar.identifier)
-        }
+        
+        XCTAssertEqual(self.sut.textLabel.text, AvatarsManagerStubbed.defaultAvatar.identifier)
+
     }
-// MARK: Helpers
+    
+    // MARK: Helpers
     
     func prepareCell()->AvatarCell
     {

@@ -13,7 +13,7 @@ import RxCocoa
 
 class DownloadsVC: UIViewController {
     
-    fileprivate let cellIdentifier = "downloadCell"
+    let cellIdentifier = "downloadCell"
     
     @IBOutlet weak var tableView: UITableView!
     
