@@ -31,24 +31,13 @@ class AvatarCell: UICollectionViewCell {
         imgView.layer.masksToBounds = true
     }
     
-    func configure(with avatar:Avatar, api:AvatarsManager)
-    {
-        api.downloadAvatarImage(avatar)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {[weak self] event in
-                
-                if case .done(let image) = event {
-                    self?.imgView.image = image
-                    self?.toggleActivityIndicatorStatus(true)
-                }
-                
-                }, onError: {[weak self] error in
-                    
-                    self?.toggleActivityIndicatorStatus(true)
-                    
-            }).disposed(by: disposeBag)
-        
-        textLabel.text = avatar.identifier
+    func configure(with vm:AvatarVMType)
+    {        
+        vm.image.drive(imgView.rx.image).disposed(by: disposeBag)
+        vm.loading.drive(onNext: {[weak self] isLoading in
+            self?.toggleActivityIndicatorStatus(isLoading)
+        }).disposed(by: disposeBag)
+        vm.title.drive(textLabel.rx.text).disposed(by: disposeBag)
     }
     
     
@@ -58,14 +47,12 @@ class AvatarCell: UICollectionViewCell {
         disposeBag = DisposeBag()
         toggleActivityIndicatorStatus(false)
         imgView.image = nil
-        
     }
     
     
-    
-    private func toggleActivityIndicatorStatus(_ stop:Bool)
+    private func toggleActivityIndicatorStatus(_ loading:Bool)
     {
-        if stop {
+        if !loading {
             activityIndicator.stopAnimating()
         }else{
             activityIndicator.startAnimating()

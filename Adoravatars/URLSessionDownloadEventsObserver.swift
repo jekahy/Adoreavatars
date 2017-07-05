@@ -26,10 +26,16 @@ extension URLSessionDownloadEventsObserver : URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
-        let type:SessionDownloadEventType = .didFinishDownloading(location: location)
-        let event = SessionDownloadEvent(type: type, session: session, task: downloadTask)
-        eventsSubject.onNext(event)
+        do{
+            let data = try Data(contentsOf: location)
+            let type = SessionDownloadEventType.didFinishDownloading(data: data)
+            let event = SessionDownloadEvent(type: type, session: session, task: downloadTask)
+            eventsSubject.onNext(event)
+        }catch (let error){
+            eventsSubject.onError(error)
+        }
     }
+    
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         

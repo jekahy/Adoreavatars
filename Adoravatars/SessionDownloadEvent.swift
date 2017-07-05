@@ -10,7 +10,7 @@ import Foundation
 
 enum SessionDownloadEventType {
     
-    case didFinishDownloading(location: URL)
+    case didFinishDownloading(data: Data)
     
     case didWriteData(progress:Double)
     

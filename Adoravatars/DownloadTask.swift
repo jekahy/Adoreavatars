@@ -8,24 +8,20 @@
 
 import RxSwift
 
-enum DownloadTaskEvent {
 
-    case progress(Double)
-    case done(UIImage)
-    case finish
+
+protocol DownloadTaskType {
     
-    func didComplete()->Bool {
-        switch self {
-        case .finish: return true
-        default:      return false
-        }
-    }
+    var avatar:Avatar{get}
+    var events:Observable<DownloadTaskEvent>{get}
+    var updatedAt:Observable<Date>{get}
+    var status:Observable<DownloadTask.Status>{get}
 }
 
 
-class DownloadTask {
+class DownloadTask:DownloadTaskType {
     
-    enum DownloadTaskStatus:String {
+    enum Status:String {
         case queued = "queued"
         case inProgress = "in progress"
         case done = "done"
@@ -33,9 +29,13 @@ class DownloadTask {
     }
     
     let avatar:Avatar
-    let events:Observable<DownloadTaskEvent>
-    private (set) var updatedAt = Date()
-    private (set) var status = DownloadTaskStatus.queued
+    private let updatedAtSubj = BehaviorSubject<Date>(value: Date())
+    private let statusSubj = BehaviorSubject<Status>(value: .queued)
+    
+    
+    private (set) var events:Observable<DownloadTaskEvent>
+    private (set) lazy var updatedAt:Observable<Date> = self.updatedAtSubj.asObservable()
+    private (set) lazy var status:Observable<Status> = self.statusSubj.asObservable()
 
     private let disposeBag = DisposeBag()
         
@@ -43,16 +43,33 @@ class DownloadTask {
         
         self.avatar = avatar
         self.events = eventsObservable
-        events.subscribe { [weak self] event in
-            self?.updatedAt = Date()
-            switch event {
-            case .completed:    self?.status = .done
-            case .error:        self?.status = .failed
-            case .next(let downoadEvent):
-                if case .progress = downoadEvent{
-                    self?.status = .inProgress
+        
+        events.subscribe(onNext: { [weak self] downoadEvent in
+            
+                self?.updatedAtSubj.onNext(Date())
+                switch downoadEvent{
+                    case .progress: self?.statusSubj.onNext(.inProgress)
+                    default:        self?.statusSubj.onNext(.done)
                 }
-            }
-        }.disposed(by: disposeBag)
+
+            }, onError: {[weak self] error in
+                self?.updatedAtSubj.onNext(Date())
+                self?.statusSubj.onNext(.failed)
+            
+            }, onCompleted: {  [weak self] in
+                self?.statusSubj.onNext(.done)
+            
+        }).disposed(by: disposeBag)
     }
 }
+
+
+extension DownloadTask:Equatable {
+    
+    
+    static func ==(lhs: DownloadTask, rhs: DownloadTask) -> Bool
+    {
+        return lhs.avatar == rhs.avatar
+    }
+}
+

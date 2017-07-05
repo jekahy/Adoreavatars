@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15E869BC1746EA9131F69DE8 /* Pods_AdoravatarsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A7350D05020CC1135EF87C /* Pods_AdoravatarsTests.framework */; };
 		74F8E9CDC7A4251E60203882 /* Pods_Adoravatars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */; };
 		E13101201EFE65520051151E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131011F1EFE65520051151E /* DateExtensions.swift */; };
+		E14D1B5D1F0008650003F9B0 /* AvatarsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */; };
+		E14D1B5F1F000A370003F9B0 /* AvatarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */; };
+		E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16801091F0402A30026F269 /* AvatarTests.swift */; };
+		E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33D1F00159C009C891A /* DownloadsVM.swift */; };
+		E168A3401F00164D009C891A /* DownloadVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33F1F00164D009C891A /* DownloadVM.swift */; };
 		E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */; };
 		E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */; };
 		E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163321EFA99CA0083496E /* AvatarCell.swift */; };
@@ -16,19 +22,52 @@
 		E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163361EFA9D760083496E /* AvatarsManager.swift */; };
 		E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633A1EFABB0B0083496E /* DownloadsVC.swift */; };
 		E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633C1EFAD27E0083496E /* DownloadCell.swift */; };
+		E195E5731F084A2A00AF51D4 /* AvatarsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */; };
 		E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */; };
 		E1A0C0371EFA9782003393D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0361EFA9782003393D9 /* AppDelegate.swift */; };
 		E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */; };
 		E1A0C03C1EFA9782003393D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03A1EFA9782003393D9 /* Main.storyboard */; };
 		E1A0C03E1EFA9782003393D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03D1EFA9782003393D9 /* Assets.xcassets */; };
 		E1A0C0411EFA9782003393D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */; };
+		E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */; };
+		E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */; };
+		E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */; };
+		E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */; };
+		E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */; };
+		E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */; };
+		E1B92DA91F05A1E80078E122 /* DownloadTaskEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */; };
+		E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */; };
+		E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */; };
+		E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */; };
+		E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */; };
+		E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E168010C1F0402A30026F269 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1A0C02B1EFA9782003393D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1A0C0321EFA9782003393D9;
+			remoteInfo = Adoravatars;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.debug.xcconfig"; sourceTree = "<group>"; };
 		19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adoravatars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		501C2DEB54915B26BF1DC36F /* Pods-AdoravatarsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoravatarsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdoravatarsTests/Pods-AdoravatarsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F787EBA74237E630BCDD5B0 /* Pods-AdoravatarsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoravatarsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdoravatarsTests/Pods-AdoravatarsTests.release.xcconfig"; sourceTree = "<group>"; };
 		87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adoravatars.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars.release.xcconfig"; sourceTree = "<group>"; };
+		B0A7350D05020CC1135EF87C /* Pods_AdoravatarsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdoravatarsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E131011F1EFE65520051151E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVM.swift; sourceTree = "<group>"; };
+		E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVM.swift; sourceTree = "<group>"; };
+		E16801071F0402A30026F269 /* AdoravatarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdoravatarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E16801091F0402A30026F269 /* AvatarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTests.swift; sourceTree = "<group>"; };
+		E168010B1F0402A30026F269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E168A33D1F00159C009C891A /* DownloadsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVM.swift; sourceTree = "<group>"; };
+		E168A33F1F00164D009C891A /* DownloadVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVM.swift; sourceTree = "<group>"; };
 		E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDownloadEventsObserver.swift; sourceTree = "<group>"; };
 		E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDownloadEvent.swift; sourceTree = "<group>"; };
 		E19163321EFA99CA0083496E /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
@@ -36,6 +75,7 @@
 		E19163361EFA9D760083496E /* AvatarsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsManager.swift; sourceTree = "<group>"; };
 		E191633A1EFABB0B0083496E /* DownloadsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVC.swift; sourceTree = "<group>"; };
 		E191633C1EFAD27E0083496E /* DownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
+		E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVCTests.swift; sourceTree = "<group>"; };
 		E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
 		E1A0C0331EFA9782003393D9 /* Adoravatars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adoravatars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A0C0361EFA9782003393D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,9 +84,29 @@
 		E1A0C03D1EFA9782003393D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1A0C0401EFA9782003393D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1A0C0421EFA9782003393D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVMTests.swift; sourceTree = "<group>"; };
+		E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarsManagerStubbed.swift; path = Adoravatars/Mocks/AvatarsManagerStubbed.swift; sourceTree = SOURCE_ROOT; };
+		E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVMTests.swift; sourceTree = "<group>"; };
+		E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVMTests.swift; sourceTree = "<group>"; };
+		E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
+		E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
+		E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskEvent.swift; sourceTree = "<group>"; };
+		E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVMTests.swift; sourceTree = "<group>"; };
+		E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskMock.swift; sourceTree = "<group>"; };
+		E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCellTests.swift; sourceTree = "<group>"; };
+		E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVMMock.swift; sourceTree = "<group>"; };
+		E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCellTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E16801041F0402A30026F269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15E869BC1746EA9131F69DE8 /* Pods_AdoravatarsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E1A0C0301EFA9782003393D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				19A574ED4A72FD4E2AF5D249 /* Pods_Adoravatars.framework */,
+				B0A7350D05020CC1135EF87C /* Pods_AdoravatarsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -83,6 +144,32 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		E14D1B5B1F0008180003F9B0 /* VIew Models */ = {
+			isa = PBXGroup;
+			children = (
+				E14D1B5C1F0008650003F9B0 /* AvatarsVM.swift */,
+				E14D1B5E1F000A370003F9B0 /* AvatarVM.swift */,
+				E168A33D1F00159C009C891A /* DownloadsVM.swift */,
+				E168A33F1F00164D009C891A /* DownloadVM.swift */,
+			);
+			name = "VIew Models";
+			sourceTree = "<group>";
+		};
+		E16801081F0402A30026F269 /* AdoravatarsTests */ = {
+			isa = PBXGroup;
+			children = (
+				E1B92D961F040F470078E122 /* Fakes */,
+				E1C47AA21F07A66500D7A5FD /* Cells */,
+				E1C47AA11F07A3F400D7A5FD /* View Models */,
+				E195E5711F084A0D00AF51D4 /* Controllers */,
+				E16801091F0402A30026F269 /* AvatarTests.swift */,
+				E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */,
+				E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */,
+				E168010B1F0402A30026F269 /* Info.plist */,
+			);
+			path = AdoravatarsTests;
+			sourceTree = "<group>";
+		};
 		E186B2381EFBF986008EF533 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +188,19 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		E195E5711F084A0D00AF51D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		E1A0C02A1EFA9782003393D9 = {
 			isa = PBXGroup;
 			children = (
 				E1A0C0351EFA9782003393D9 /* Adoravatars */,
+				E16801081F0402A30026F269 /* AdoravatarsTests */,
 				E1A0C0341EFA9782003393D9 /* Products */,
 				FE66DFF6527F0D3269CD66E5 /* Pods */,
 				3A23EDC8A5F3A6CEA0B4B422 /* Frameworks */,
@@ -115,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				E1A0C0331EFA9782003393D9 /* Adoravatars.app */,
+				E16801071F0402A30026F269 /* AdoravatarsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,16 +223,49 @@
 				E13101211EFE663D0051151E /* RxURLSessionDownloadDelegate */,
 				E19163361EFA9D760083496E /* AvatarsManager.swift */,
 				E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */,
-				E13101221EFE66600051151E /* Models */,
+				E1B92DA81F05A1E80078E122 /* DownloadTaskEvent.swift */,
 				E186B2391EFBF992008EF533 /* Cells */,
+				E13101221EFE66600051151E /* Models */,
+				E14D1B5B1F0008180003F9B0 /* VIew Models */,
 				E186B2381EFBF986008EF533 /* Controllers */,
 				E1A0C03A1EFA9782003393D9 /* Main.storyboard */,
-				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C03F1EFA9782003393D9 /* LaunchScreen.storyboard */,
+				E1A0C03D1EFA9782003393D9 /* Assets.xcassets */,
 				E1A0C0421EFA9782003393D9 /* Info.plist */,
 				E131011F1EFE65520051151E /* DateExtensions.swift */,
 			);
 			path = Adoravatars;
+			sourceTree = "<group>";
+		};
+		E1B92D961F040F470078E122 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */,
+				E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */,
+				E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */,
+			);
+			name = Fakes;
+			path = AdoravatarsTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		E1C47AA11F07A3F400D7A5FD /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E1B92D921F0407F80078E122 /* AvatarsVMTests.swift */,
+				E1B92D9E1F042BB40078E122 /* AvatarVMTests.swift */,
+				E1B92DA21F04F7C80078E122 /* DownloadsVMTests.swift */,
+				E1B92DAA1F068A4E0078E122 /* DownloadVMTests.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		E1C47AA21F07A66500D7A5FD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */,
+				E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		FE66DFF6527F0D3269CD66E5 /* Pods */ = {
@@ -143,6 +273,8 @@
 			children = (
 				15F58B5939FF45D196EED0FA /* Pods-Adoravatars.debug.xcconfig */,
 				87A77DEA7F4154CC89FBEC32 /* Pods-Adoravatars.release.xcconfig */,
+				501C2DEB54915B26BF1DC36F /* Pods-AdoravatarsTests.debug.xcconfig */,
+				6F787EBA74237E630BCDD5B0 /* Pods-AdoravatarsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -150,6 +282,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E16801061F0402A30026F269 /* AdoravatarsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E16801101F0402A30026F269 /* Build configuration list for PBXNativeTarget "AdoravatarsTests" */;
+			buildPhases = (
+				157511E6AE050FA7B2A48B1E /* [CP] Check Pods Manifest.lock */,
+				E16801031F0402A30026F269 /* Sources */,
+				E16801041F0402A30026F269 /* Frameworks */,
+				E16801051F0402A30026F269 /* Resources */,
+				E29164A6B6AE4B96312C597D /* [CP] Embed Pods Frameworks */,
+				EC59CA5D0EBFCD6C5BCEA256 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E168010D1F0402A30026F269 /* PBXTargetDependency */,
+			);
+			name = AdoravatarsTests;
+			productName = AdoravatarsTests;
+			productReference = E16801071F0402A30026F269 /* AdoravatarsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E1A0C0321EFA9782003393D9 /* Adoravatars */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1A0C0451EFA9782003393D9 /* Build configuration list for PBXNativeTarget "Adoravatars" */;
@@ -180,6 +333,12 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Eugene;
 				TargetAttributes = {
+					E16801061F0402A30026F269 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 93V5PGPZMP;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E1A0C0321EFA9782003393D9;
+					};
 					E1A0C0321EFA9782003393D9 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 93V5PGPZMP;
@@ -201,11 +360,19 @@
 			projectRoot = "";
 			targets = (
 				E1A0C0321EFA9782003393D9 /* Adoravatars */,
+				E16801061F0402A30026F269 /* AdoravatarsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E16801051F0402A30026F269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E1A0C0311EFA9782003393D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +399,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		157511E6AE050FA7B2A48B1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1ADC1559EFCAFCB656655E85 /* [CP] Check Pods Manifest.lock */ = {
@@ -264,28 +446,91 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adoravatars/Pods-Adoravatars-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E29164A6B6AE4B96312C597D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdoravatarsTests/Pods-AdoravatarsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC59CA5D0EBFCD6C5BCEA256 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdoravatarsTests/Pods-AdoravatarsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E16801031F0402A30026F269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */,
+				E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */,
+				E195E5731F084A2A00AF51D4 /* AvatarsVCTests.swift in Sources */,
+				E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */,
+				E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */,
+				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
+				E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */,
+				E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */,
+				E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */,
+				E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */,
+				E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */,
+				E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */,
+				E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E1A0C02F1EFA9782003393D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */,
+				E14D1B5F1F000A370003F9B0 /* AvatarVM.swift in Sources */,
 				E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */,
 				E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */,
 				E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */,
 				E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */,
 				E13101201EFE65520051151E /* DateExtensions.swift in Sources */,
+				E168A3401F00164D009C891A /* DownloadVM.swift in Sources */,
 				E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */,
+				E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */,
+				E14D1B5D1F0008650003F9B0 /* AvatarsVM.swift in Sources */,
 				E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */,
 				E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */,
 				E19163351EFA9D0A0083496E /* Avatar.swift in Sources */,
 				E1A0C0371EFA9782003393D9 /* AppDelegate.swift in Sources */,
+				E1B92DA91F05A1E80078E122 /* DownloadTaskEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E168010D1F0402A30026F269 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1A0C0321EFA9782003393D9 /* Adoravatars */;
+			targetProxy = E168010C1F0402A30026F269 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E1A0C03A1EFA9782003393D9 /* Main.storyboard */ = {
@@ -307,6 +552,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E168010E1F0402A30026F269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 501C2DEB54915B26BF1DC36F /* Pods-AdoravatarsTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 93V5PGPZMP;
+				INFOPLIST_FILE = AdoravatarsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eugene.AdoravatarsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adoravatars.app/Adoravatars";
+			};
+			name = Debug;
+		};
+		E168010F1F0402A30026F269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F787EBA74237E630BCDD5B0 /* Pods-AdoravatarsTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 93V5PGPZMP;
+				INFOPLIST_FILE = AdoravatarsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eugene.AdoravatarsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adoravatars.app/Adoravatars";
+			};
+			name = Release;
+		};
 		E1A0C0431EFA9782003393D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -433,6 +708,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E16801101F0402A30026F269 /* Build configuration list for PBXNativeTarget "AdoravatarsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E168010E1F0402A30026F269 /* Debug */,
+				E168010F1F0402A30026F269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E1A0C02E1EFA9782003393D9 /* Build configuration list for PBXProject "Adoravatars" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
