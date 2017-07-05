@@ -42,7 +42,7 @@ class AvatarsManagerStubbed: AvatarsProvider {
     }
     
     func getAvatars() -> Observable<[Avatar]> {
-        
+       
         return Observable.just([AvatarsManagerStubbed.defaultAvatar])
     }
 }

@@ -13,10 +13,10 @@ import RxSwift
 class AvatarsVC: UIViewController {
 
     let cellIdentifier = "avatarCell"
-    fileprivate let toDownloadsSegue = "toDownloadsVC"
+    let toDownloadsSegue = "toDownloadsVC"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let viewModel:AvatarsVMType = AvatarsVM()
+    var viewModel:AvatarsVMType = AvatarsVM()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad()
@@ -35,6 +35,7 @@ class AvatarsVC: UIViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: nil, action: nil)
+
         navigationItem.rightBarButtonItem?.rx.tap.subscribe(onNext:{ [unowned self] _ in
             
             self.performSegue(withIdentifier: self.toDownloadsSegue, sender: nil)
@@ -43,7 +44,6 @@ class AvatarsVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == toDownloadsSegue, let downloadsVC = segue.destination as? DownloadsVC{
             downloadsVC.viewModel = viewModel.downloadsVM
         }

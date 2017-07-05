@@ -22,6 +22,7 @@
 		E19163371EFA9D760083496E /* AvatarsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163361EFA9D760083496E /* AvatarsManager.swift */; };
 		E191633B1EFABB0B0083496E /* DownloadsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633A1EFABB0B0083496E /* DownloadsVC.swift */; };
 		E191633D1EFAD27E0083496E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191633C1EFAD27E0083496E /* DownloadCell.swift */; };
+		E195E5731F084A2A00AF51D4 /* AvatarsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */; };
 		E19AE2E31EFAE5EE005A1963 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */; };
 		E1A0C0371EFA9782003393D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0361EFA9782003393D9 /* AppDelegate.swift */; };
 		E1A0C0391EFA9782003393D9 /* AvatarsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A0C0381EFA9782003393D9 /* AvatarsVC.swift */; };
@@ -74,6 +75,7 @@
 		E19163361EFA9D760083496E /* AvatarsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsManager.swift; sourceTree = "<group>"; };
 		E191633A1EFABB0B0083496E /* DownloadsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVC.swift; sourceTree = "<group>"; };
 		E191633C1EFAD27E0083496E /* DownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
+		E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsVCTests.swift; sourceTree = "<group>"; };
 		E19AE2E21EFAE5EE005A1963 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
 		E1A0C0331EFA9782003393D9 /* Adoravatars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adoravatars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A0C0361EFA9782003393D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				E1B92D961F040F470078E122 /* Fakes */,
 				E1C47AA21F07A66500D7A5FD /* Cells */,
 				E1C47AA11F07A3F400D7A5FD /* View Models */,
+				E195E5711F084A0D00AF51D4 /* Controllers */,
 				E16801091F0402A30026F269 /* AvatarTests.swift */,
 				E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */,
 				E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */,
@@ -183,6 +186,14 @@
 				E191633C1EFAD27E0083496E /* DownloadCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		E195E5711F084A0D00AF51D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		E1A0C02A1EFA9782003393D9 = {
@@ -474,6 +485,7 @@
 			files = (
 				E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */,
 				E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */,
+				E195E5731F084A2A00AF51D4 /* AvatarsVCTests.swift in Sources */,
 				E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */,
 				E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */,
 				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
