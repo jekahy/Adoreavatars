@@ -7,30 +7,17 @@
 //
 
 import XCTest
-import RxTest
-import RxSwift
-import RxCocoa
 
 @testable import Adoravatars
 
 class AvatarsVCTests: XCTestCase {
     
     var sut:AvatarsVC!
-    var scheduler: TestScheduler!
-
     
     override func setUp() {
         super.setUp()
         sut = createSut(type: AvatarsVC.self)
-        scheduler = TestScheduler(initialClock: 0)
-
     }
-    
-    override func tearDown() {
-        
-        super.tearDown()
-    }
-    
     
     // MARK: Tests
     

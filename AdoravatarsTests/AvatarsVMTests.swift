@@ -7,12 +7,9 @@
 //
 
 import XCTest
-import RxTest
 import RxSwift
-import RxCocoa
 
 @testable import Adoravatars
-
 
 class AvatarsVMTests: XCTestCase {
     

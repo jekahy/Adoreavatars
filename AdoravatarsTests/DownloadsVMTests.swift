@@ -25,7 +25,6 @@ class DownloadsVMTests: XCTestCase {
         super.setUp()
         vm = DownloadsVM(api: manager)
         scheduler = TestScheduler(initialClock: 0)
-
     }
     
     override func tearDown() {

@@ -36,7 +36,9 @@ class AvatarsVC: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Network", style: .plain, target: nil, action: nil)
 
-        navigationItem.rightBarButtonItem?.rx.tap.subscribe(onNext:{ [unowned self] _ in
+        navigationItem.rightBarButtonItem?.rx.tap
+            .throttle(1, latest: true, scheduler: MainScheduler.instance)
+            .subscribe(onNext:{ [unowned self] _ in
             
             self.performSegue(withIdentifier: self.toDownloadsSegue, sender: nil)
             

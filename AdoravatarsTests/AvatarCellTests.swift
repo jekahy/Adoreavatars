@@ -7,9 +7,6 @@
 //
 
 import XCTest
-import UIKit
-import RxTest
-import RxSwift
 import RxCocoa
 
 @testable import Adoravatars
@@ -64,7 +61,6 @@ class AvatarCellTests: XCTestCase {
         sut.configure(with: avatarVM)
 
         XCTAssertEqual(self.sut.imgView.image, AvatarsManagerStubbed.defaultImage)
-
     }
     
     func testConfigureLoadingConnected()
@@ -86,9 +82,7 @@ class AvatarCellTests: XCTestCase {
         let avatarVM = AvatarVMMock()
         sut.configure(with: avatarVM)
         
-        
         XCTAssertEqual(self.sut.textLabel.text, AvatarsManagerStubbed.defaultAvatar.identifier)
-
     }
     
     // MARK: Helpers

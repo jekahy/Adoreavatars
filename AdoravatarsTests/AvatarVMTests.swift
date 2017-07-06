@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import RxTest
 import RxSwift
 
 @testable import Adoravatars

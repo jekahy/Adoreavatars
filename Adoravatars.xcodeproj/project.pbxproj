@@ -15,6 +15,7 @@
 		E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16801091F0402A30026F269 /* AvatarTests.swift */; };
 		E168A33E1F00159C009C891A /* DownloadsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33D1F00159C009C891A /* DownloadsVM.swift */; };
 		E168A3401F00164D009C891A /* DownloadVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168A33F1F00164D009C891A /* DownloadVM.swift */; };
+		E16EDF2D1F0E3BA90079E948 /* DownloadVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16EDF2C1F0E3BA90079E948 /* DownloadVCTests.swift */; };
 		E185B45C1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */; };
 		E185B45E1EFD68C7002AF6B7 /* SessionDownloadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */; };
 		E19163331EFA99CA0083496E /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19163321EFA99CA0083496E /* AvatarCell.swift */; };
@@ -68,6 +69,7 @@
 		E168010B1F0402A30026F269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E168A33D1F00159C009C891A /* DownloadsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsVM.swift; sourceTree = "<group>"; };
 		E168A33F1F00164D009C891A /* DownloadVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVM.swift; sourceTree = "<group>"; };
+		E16EDF2C1F0E3BA90079E948 /* DownloadVCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadVCTests.swift; sourceTree = "<group>"; };
 		E185B45B1EFD65E0002AF6B7 /* URLSessionDownloadEventsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDownloadEventsObserver.swift; sourceTree = "<group>"; };
 		E185B45D1EFD68C7002AF6B7 /* SessionDownloadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDownloadEvent.swift; sourceTree = "<group>"; };
 		E19163321EFA99CA0083496E /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				E195E5721F084A2A00AF51D4 /* AvatarsVCTests.swift */,
+				E16EDF2C1F0E3BA90079E948 /* DownloadVCTests.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */,
 				E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */,
 				E1B92DAB1F068A4E0078E122 /* DownloadVMTests.swift in Sources */,
+				E16EDF2D1F0E3BA90079E948 /* DownloadVCTests.swift in Sources */,
 				E1B92D931F0407F80078E122 /* AvatarsVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
