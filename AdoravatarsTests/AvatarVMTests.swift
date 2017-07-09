@@ -52,7 +52,7 @@ class AvatarVMTests: XCTestCase {
     
     func testLoading()
     {
-        let expected = [true, true, false]
+        let expected = [true, false]
         
         let promise = expectation(description: "image test")
         

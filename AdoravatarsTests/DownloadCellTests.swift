@@ -79,7 +79,7 @@ class DownloadCellTests: XCTestCase {
     func testConfigureProgressConnected()
     {
         let expectedProgress = 0.66
-        let downloadVM = DownloadVM(DownloadTaskMock( events: Observable.just(DownloadTaskEvent.progress(expectedProgress))))
+        let downloadVM = DownloadVM(DownloadTaskMock(progress: Observable.just(expectedProgress)))
         
         sut.configureWith(downloadVM)
         

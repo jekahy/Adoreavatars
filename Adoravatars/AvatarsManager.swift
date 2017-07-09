@@ -17,7 +17,7 @@ enum DownloadError:Error {
 protocol AvatarsProvider:class {
     
     var downloadTasks:Observable<[DownloadTaskType]>{get}
-    func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
+    func downloadAvatarImage(_ avatar:Avatar)->DownloadTaskType
     func getAvatars()->Observable<[Avatar]>
 }
 
@@ -48,10 +48,10 @@ class AvatarsManager: AvatarsProvider{
         self.cache = cache
     }
     
-    func downloadAvatarImage(_ avatar:Avatar)->Observable<DownloadTaskEvent>
+    func downloadAvatarImage(_ avatar:Avatar)->DownloadTaskType
     {
         if let task = self.downloadsVar.value.first(where: {$0.avatar == avatar}){
-            return task.events
+            return task
         }
         
         let taskEventsObservable = Observable.just(avatar)
@@ -89,7 +89,7 @@ class AvatarsManager: AvatarsProvider{
         
         let downloadTask = DownloadTask(avatar: avatar, eventsObservable:taskEventsObservable)
         self.downloadsVar.value.append(downloadTask)
-        return taskEventsObservable
+        return downloadTask
     }
     
     

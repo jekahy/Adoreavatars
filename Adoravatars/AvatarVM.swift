@@ -20,8 +20,6 @@ protocol AvatarVMType:class {
 
 class AvatarVM:AvatarVMType  {
     
-    private let disposeBag = DisposeBag()
-    
     let title:Driver<String>
     let loading:Driver<Bool>
     let image:Driver<UIImage?>
@@ -31,19 +29,13 @@ class AvatarVM:AvatarVMType  {
         
         title = Driver.just(avatar.identifier)
 
-        image = api.downloadAvatarImage(avatar)
-            .map({ downloadEvent -> UIImage? in
-                if case .done(let img) = downloadEvent{
-                    return img
-                }
-                return nil
-            }).asDriver(onErrorJustReturn: nil)
+        image = api.downloadAvatarImage(avatar).image.asDriver(onErrorJustReturn: nil)
         
-        loading = api.downloadAvatarImage(avatar)
-            .map({ downloadEvent -> Bool in
-                switch downloadEvent{
-                case .progress: return true
-                default:        return false
+        loading = api.downloadAvatarImage(avatar).status
+            .map({ status -> Bool in
+                switch status{
+                    case .inProgress, .queued: return true
+                    default:        return false
                 }
             })
             .startWith(true)

@@ -8,14 +8,13 @@
 
 import RxSwift
 
-
-
 protocol DownloadTaskType {
     
     var avatar:Avatar{get}
-    var events:Observable<DownloadTaskEvent>{get}
+    var progress:Observable<Double>{get}
     var updatedAt:Observable<Date>{get}
     var status:Observable<DownloadTask.Status>{get}
+    var image:Observable<UIImage?>{get}
 }
 
 
@@ -29,27 +28,37 @@ class DownloadTask:DownloadTaskType {
     }
     
     let avatar:Avatar
+    
     private let updatedAtSubj = BehaviorSubject<Date>(value: Date())
     private let statusSubj = BehaviorSubject<Status>(value: .queued)
+    private let progressSubj = BehaviorSubject<Double>(value: 0)
+    private let imageSubj = BehaviorSubject<UIImage?>(value:nil)
     
-    
-    private (set) var events:Observable<DownloadTaskEvent>
     private (set) lazy var updatedAt:Observable<Date> = self.updatedAtSubj.asObservable()
     private (set) lazy var status:Observable<Status> = self.statusSubj.asObservable()
+    
+    private (set) lazy var progress:Observable<Double> = self.progressSubj.asObservable()
+    private (set) lazy var image:Observable<UIImage?> = self.imageSubj.asObservable()
 
     private let disposeBag = DisposeBag()
         
     init(avatar:Avatar, eventsObservable:Observable<DownloadTaskEvent>) {
         
         self.avatar = avatar
-        self.events = eventsObservable
         
-        events.subscribe(onNext: { [weak self] downoadEvent in
+        eventsObservable.subscribe(onNext: { [weak self] downoadEvent in
             
                 self?.updatedAtSubj.onNext(Date())
                 switch downoadEvent{
-                    case .progress: self?.statusSubj.onNext(.inProgress)
-                    default:        self?.statusSubj.onNext(.done)
+                    case .progress(let progress):
+                        self?.statusSubj.onNext(.inProgress)
+                        self?.progressSubj.onNext(progress)
+                    case .done(let image):
+                        self?.imageSubj.onNext(image)
+                        fallthrough
+                    default:
+                        self?.statusSubj.onNext(.done)
+                        self?.progressSubj.onNext(1)
                 }
 
             }, onError: {[weak self] error in

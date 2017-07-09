@@ -23,16 +23,9 @@ class AvatarsManagerStubbed: AvatarsProvider {
     
     static let defaultEventsObservable = Observable.from(AvatarsManagerStubbed.defaultDownloadEvents)
     
-    func downloadAvatarImage(_ avatar: Avatar) -> Observable<DownloadTaskEvent> {
+    func downloadAvatarImage(_ avatar: Avatar) -> DownloadTaskType {
         
-        return Observable<DownloadTaskEvent>.create({ observer -> Disposable in
-            
-            for e in AvatarsManagerStubbed.defaultDownloadEvents{
-                observer.onNext(e)
-            }
-            observer.onCompleted()
-            return Disposables.create()
-        })
+        return DownloadTaskMock()
     }
     
     

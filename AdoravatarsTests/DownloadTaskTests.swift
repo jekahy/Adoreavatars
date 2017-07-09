@@ -60,17 +60,17 @@ class DownloadTaskTests: XCTestCase {
     }
     
     
-    func testInitEventsObservable()
-    {
-        let observer = scheduler.createObserver(DownloadTaskEvent.self)
-        subscription = sut.events.subscribe(observer)
-        
-        let expected:[RecordedDTaskEvent] = [next(0, .progress(0.5)), next(0, .done(AvatarsManagerStubbed.defaultImage)), completed(0)]
-        
-        scheduler.start()
-
-        XCTAssertEqual(observer.events, expected)
-    }
+//    func testInitEventsObservable()
+//    {
+//        let observer = scheduler.createObserver(DownloadTaskEvent.self)
+//        subscription = sut.events.subscribe(observer)
+//        
+//        let expected:[RecordedDTaskEvent] = [next(0, .progress(0.5)), next(0, .done(AvatarsManagerStubbed.defaultImage)), completed(0)]
+//        
+//        scheduler.start()
+//
+//        XCTAssertEqual(observer.events, expected)
+//    }
     
     
     func testUpdatedAtChanges()

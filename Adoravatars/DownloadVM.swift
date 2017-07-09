@@ -33,12 +33,6 @@ class DownloadVM:DownloadVMType {
 
         status = task.status.map{$0.rawValue}.asDriver(onErrorJustReturn: "")
         timestamp = task.updatedAt.map{$0.string}.asDriver(onErrorJustReturn: "")
-        progress = task.events.map({ downloadEvent -> Float in
-            switch downloadEvent {
-            case .progress(let progress):   return Float(progress)
-            default:                        return 1
-            }
-        }).startWith(0).asDriver(onErrorJustReturn: 0)
-        
+        progress = task.progress.map{Float($0)}.asDriver(onErrorJustReturn: 0)
     }
 }

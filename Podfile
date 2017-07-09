@@ -6,6 +6,7 @@ def shared_pods
 pod 'RxSwift'
 pod 'RxSwiftExt'
 pod 'RxCocoa'
+pod 'Action'
 
 end
 
