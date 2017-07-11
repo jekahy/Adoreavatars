@@ -16,18 +16,23 @@ enum DownloadError:Error {
 
 protocol AvatarsProvider:class {
     
+    var baseURL:URL{get}
+    var sessionConfig:URLSessionConfiguration{get}
+    var cache:URLCache{get}
     var downloadTasks:Observable<[DownloadTaskType]>{get}
+    
     func downloadAvatarImage(_ avatar:Avatar)->DownloadTaskType
     func getAvatars()->Observable<[Avatar]>
+    
 }
 
 class AvatarsManager: AvatarsProvider{
     
-    private let baseURL:URL
-    private let sessionConfig:URLSessionConfiguration
-    private let cache:URLCache
+    let baseURL:URL
+    let sessionConfig:URLSessionConfiguration
+    let cache:URLCache
     
-    private lazy var session:URLSession = {
+    private (set) lazy var session:URLSession = {
         
         let config = self.sessionConfig
         config.urlCache = self.cache
@@ -151,7 +156,6 @@ extension AvatarsManager {
             }
             return Disposables.create()
         }
-        
     }
     
     fileprivate func cacheData(_ data:Data, for task:URLSessionTask, cache:URLCache)

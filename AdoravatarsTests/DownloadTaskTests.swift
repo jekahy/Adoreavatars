@@ -35,10 +35,10 @@ class DownloadTaskTests: XCTestCase {
     
     
     override func setUp() {
+        
         super.setUp()
         sut = DownloadTask(avatar:avatar, eventsObservable:AvatarsManagerStubbed.defaultEventsObservable)
         scheduler = TestScheduler(initialClock: 0)
-        
     }
     
     override func tearDown() {

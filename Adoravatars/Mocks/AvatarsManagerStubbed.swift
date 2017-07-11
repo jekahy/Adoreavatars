@@ -13,6 +13,11 @@ import RxSwift
 
 class AvatarsManagerStubbed: AvatarsProvider {
     
+    
+    let baseURL = AvatarsManagerStubbed.defaultBaseURL
+    let cache = AvatarsManagerStubbed.defaultCache
+    let sessionConfig = AvatarsManagerStubbed.defaultSessionConfig
+    
     let downloadTasks:Observable<[DownloadTaskType]> = Observable.just([AvatarsManagerStubbed.defaultTask])
     
     static let defaultTask = DownloadTaskMock()
@@ -36,4 +41,19 @@ class AvatarsManagerStubbed: AvatarsProvider {
        
         return Observable.just([DownloadTaskMock.defaultAvatar])
     }
+}
+
+extension AvatarsManagerStubbed {
+ 
+    static let defaultBaseURL: URL = URL(string: "http://api.adorable.io/avatar")!
+    
+    static let defaultSessionConfig:URLSessionConfiguration = {
+        let s = URLSessionConfiguration.default
+        s.urlCache = AvatarsManagerStubbed.defaultCache
+        return s
+    }()
+    
+    static let defaultCache = URLCache(memoryCapacity: 100, diskCapacity: 100, diskPath: nil)
+
+
 }

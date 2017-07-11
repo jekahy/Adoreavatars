@@ -42,6 +42,7 @@
 		E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */; };
 		E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */; };
 		E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */; };
+		E1D471011F150865004499BB /* AvatarsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D471001F150865004499BB /* AvatarsProviderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		E1C47AA31F07A68A00D7A5FD /* AvatarCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCellTests.swift; sourceTree = "<group>"; };
 		E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarVMMock.swift; sourceTree = "<group>"; };
 		E1C47AA71F08123300D7A5FD /* DownloadCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCellTests.swift; sourceTree = "<group>"; };
+		E1D471001F150865004499BB /* AvatarsProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				E195E5711F084A0D00AF51D4 /* Controllers */,
 				E16801091F0402A30026F269 /* AvatarTests.swift */,
 				E1B92DA61F059C600078E122 /* DownloadTaskTests.swift */,
+				E1D471001F150865004499BB /* AvatarsProviderTests.swift */,
 				E1B92DA41F056B470078E122 /* XCTestCaseExtensions.swift */,
 				E168010B1F0402A30026F269 /* Info.plist */,
 			);
@@ -494,6 +497,7 @@
 				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
 				E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */,
 				E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */,
+				E1D471011F150865004499BB /* AvatarsProviderTests.swift in Sources */,
 				E1B92DA71F059C600078E122 /* DownloadTaskTests.swift in Sources */,
 				E1C47AA61F07EDE600D7A5FD /* AvatarVMMock.swift in Sources */,
 				E1C47AA81F08123300D7A5FD /* DownloadCellTests.swift in Sources */,
