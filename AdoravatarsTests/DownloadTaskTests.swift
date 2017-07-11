@@ -29,11 +29,8 @@ class DownloadTaskTests: XCTestCase {
     
     
     var defaultTestEvents:[RecordedDTaskEvent]  {
-        var time = 0
-        return AvatarsManagerStubbed.defaultDownloadEvents.map{ event ->RecordedDTaskEvent in
-            time = time + 100
-            return next(time, event)
-        }
+        let times = generateTimeFor(elementsNum:AvatarsManagerStubbed.defaultDownloadEvents.count)
+        return zip(times, AvatarsManagerStubbed.defaultDownloadEvents).map{next($0,$1)}
     }
     
     
@@ -59,23 +56,28 @@ class DownloadTaskTests: XCTestCase {
         XCTAssertEqual(expected, sut.avatar)
     }
     
-    
-//    func testInitEventsObservable()
-//    {
-//        let observer = scheduler.createObserver(DownloadTaskEvent.self)
-//        subscription = sut.events.subscribe(observer)
-//        
-//        let expected:[RecordedDTaskEvent] = [next(0, .progress(0.5)), next(0, .done(AvatarsManagerStubbed.defaultImage)), completed(0)]
-//        
-//        scheduler.start()
-//
-//        XCTAssertEqual(observer.events, expected)
-//    }
-    
+    func testProgress()
+    {
+        let timeArr = generateTimeFor(elementsNum: DownloadTaskMock.defaultDownloadEvents.count)
+        let expected = zip(timeArr, DownloadTaskMock.defaultProgress).map{next($0,$1)}
+
+        let observable = scheduler.createColdObservable(defaultTestEvents)
+        let observer = scheduler.createObserver(Double.self)
+        
+        sut = DownloadTask(avatar:avatar, eventsObservable:observable.asObservable())
+        
+        subscription = sut.progress.subscribe(observer)
+        
+        scheduler.scheduleAt(200) {
+            let res = observer.events
+            XCTAssertEqual(expected, res)
+        }
+        scheduler.start()
+    }
+
     
     func testUpdatedAtChanges()
     {
-        
         var testEvents = defaultTestEvents
         testEvents.append(error(300, DownloadError.failed))
 
@@ -89,18 +91,17 @@ class DownloadTaskTests: XCTestCase {
             return currentDate
         }.subscribe()
 
-        scheduler.scheduleAt(350) { 
-             XCTAssertEqual(res, [true, true, true, true])
+        scheduler.scheduleAt(350) {
+            let expected = [true, true, true, true, true, true]
+             XCTAssertEqual(expected, res)
         }
         scheduler.start()
-
-        
     }
     
     func testStatusOnNextOnErrorChanges()
     {
         var testEvents = defaultTestEvents
-        testEvents.append(error(300, DownloadError.failed))
+        testEvents.append(error(200, DownloadError.failed))
         
         let observable = scheduler.createColdObservable(testEvents)
         let observer = scheduler.createObserver(DownloadTask.Status.self)
@@ -109,12 +110,11 @@ class DownloadTaskTests: XCTestCase {
         
         subscription = sut.status.subscribe(observer)
         
-        scheduler.scheduleAt(350) { 
-            XCTAssertEqual(observer.events, [next(0, .queued), next(100, .inProgress), next(200, .done), next(300, .failed)])
+        scheduler.scheduleAt(250) {
+            let expected:[Recorded<Event<DownloadTask.Status>>] =  [next(0, .queued), next(0, .inProgress),next(50, .inProgress),next(100, .inProgress), next(150, .done), next(200, .failed)]
+            XCTAssertEqual(expected, observer.events)
         }
-        
         scheduler.start()
-        
     }
 
     func testStatusOnComletedChanges()
@@ -133,6 +133,34 @@ class DownloadTaskTests: XCTestCase {
         }
         
         scheduler.start()
+    }
+    
+    
+    func testImage()
+    {
+        let expected = DownloadTaskMock.defaultImage
+        let observer = scheduler.createObserver(Optional<UIImage>.self)
+        subscription = sut.image.subscribe(observer)
+        
+        scheduler.scheduleAt(150) {
+            guard let res = observer.events.last?.value.element else{
+                XCTFail()
+                return
+            }
+            XCTAssertEqual(expected, res)
+        }
+        scheduler.start()
+    }
+    
+//    MARK: Helpers
+    
+    func generateTimeFor(elementsNum:Int, step:Int = 50)->[Int]
+    {
+        var res = [Int]()
+        for idx in 0...elementsNum{
+            res.append(idx*step)
+        }
+        return res
     }
 }
 

@@ -25,7 +25,7 @@ class DownloadTaskMock: DownloadTaskType {
     static let defaultAvatar = Avatar(identifier: "Dart")
     static let defaultStatus = DownloadTask.Status.done
     static let defaultProgress = [0,0.5,1]
-    static let defaultDownloadEvents:[DownloadTaskEvent] = [.progress(0.5), .done(defaultImage)]
+    static let defaultDownloadEvents = AvatarsManagerStubbed.defaultDownloadEvents
     
     init(_ status:Observable<DownloadTask.Status> = Observable.just(DownloadTaskMock.defaultStatus),
          updatedAt:Observable<Date> = Observable.just(DownloadTaskMock.defaultDate),

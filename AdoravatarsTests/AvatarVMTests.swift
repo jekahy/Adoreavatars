@@ -21,7 +21,7 @@ class AvatarVMTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        vm = AvatarVM(AvatarsManagerStubbed.defaultAvatar, api: manager)
+        vm = AvatarVM(DownloadTaskMock.defaultAvatar, api: manager)
     }
     
     override func tearDown() {
@@ -44,7 +44,7 @@ class AvatarVMTests: XCTestCase {
     
     func testImage()
     {
-        let expected = AvatarsManagerStubbed.defaultImage
+        let expected = DownloadTaskMock.defaultImage
         subscription = performDriverVariableTest(expected: expected, driverToTest: vm.image, title: #function)
 
     }

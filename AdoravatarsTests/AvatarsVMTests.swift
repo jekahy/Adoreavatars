@@ -48,7 +48,7 @@ class AvatarsVMTests: XCTestCase {
     
     func testAvatars()
     {
-        let expected = [AvatarsManagerStubbed.defaultAvatar]
+        let expected = [DownloadTaskMock.defaultAvatar]
         subscription = performDriverArrayTest(expected: expected, driverToTest: vm.avatars, title: #function)
     }
     

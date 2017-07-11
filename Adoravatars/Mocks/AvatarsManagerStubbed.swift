@@ -16,10 +16,8 @@ class AvatarsManagerStubbed: AvatarsProvider {
     let downloadTasks:Observable<[DownloadTaskType]> = Observable.just([AvatarsManagerStubbed.defaultTask])
     
     static let defaultTask = DownloadTaskMock()
-    static let defaultAvatar = Avatar(identifier: "default")
-    static let defaultImage = UIImage(named: "test_icon")!
     
-    static let defaultDownloadEvents:[DownloadTaskEvent] = [.progress(0.5), .done(AvatarsManagerStubbed.defaultImage)]
+    static let defaultDownloadEvents:[DownloadTaskEvent] = DownloadTaskMock.defaultProgress.map{DownloadTaskEvent.progress($0)} + [.done(DownloadTaskMock.defaultImage)]
     
     static let defaultEventsObservable = Observable.from(AvatarsManagerStubbed.defaultDownloadEvents)
     
@@ -36,6 +34,6 @@ class AvatarsManagerStubbed: AvatarsProvider {
     
     func getAvatars() -> Observable<[Avatar]> {
        
-        return Observable.just([AvatarsManagerStubbed.defaultAvatar])
+        return Observable.just([DownloadTaskMock.defaultAvatar])
     }
 }

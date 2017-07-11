@@ -37,7 +37,7 @@ class DownloadTask:DownloadTaskType {
     private (set) lazy var updatedAt:Observable<Date> = self.updatedAtSubj.asObservable()
     private (set) lazy var status:Observable<Status> = self.statusSubj.asObservable()
     
-    private (set) lazy var progress:Observable<Double> = self.progressSubj.asObservable()
+    private (set) lazy var progress:Observable<Double> = self.progressSubj.asObservable().distinctUntilChanged()
     private (set) lazy var image:Observable<UIImage?> = self.imageSubj.asObservable()
 
     private let disposeBag = DisposeBag()
@@ -53,12 +53,13 @@ class DownloadTask:DownloadTaskType {
                     case .progress(let progress):
                         self?.statusSubj.onNext(.inProgress)
                         self?.progressSubj.onNext(progress)
+                    
                     case .done(let image):
                         self?.imageSubj.onNext(image)
-                        fallthrough
-                    default:
                         self?.statusSubj.onNext(.done)
                         self?.progressSubj.onNext(1)
+                    
+                    default: break
                 }
 
             }, onError: {[weak self] error in
