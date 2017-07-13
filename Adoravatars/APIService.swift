@@ -9,13 +9,9 @@
 import Foundation
 import RxSwift
 
-enum APIBaseURLStrings:String {
+struct APIBaseURLs {
     
-    case avatar = "http://api.adorable.io/avatar"
-    
-    var url:URL? {
-        return URL(string: self.rawValue)
-    }
+    static let avatar = URL(string:"http://api.adorable.io/avatar")!
 }
 
 enum DownloadError:Error {

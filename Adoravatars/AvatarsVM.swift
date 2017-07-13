@@ -31,7 +31,7 @@ class AvatarsVM:AvatarsVMType {
     
     let downloadsVM: DownloadsVMType
     
-    init(service:AvatarsGettable = AvatarService(), api:APIDownloadable = APIService(baseURL: APIBaseURLStrings.avatar.url!)){
+    init(service:AvatarsGettable = AvatarService(), api:APIDownloadable = APIService(baseURL: APIBaseURLs.avatar)){
         
         avatars = service.getAvatars().asDriver(onErrorJustReturn:[])
         title = Observable.just("Adoreavatars").asDriver(onErrorJustReturn: "")

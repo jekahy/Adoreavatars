@@ -14,9 +14,9 @@ import RxCocoa
 
 class AvatarVMMock: AvatarVMType {    
     
-    private (set) var image:Driver<UIImage?> =  Observable.just(AvatarDownloadTaskMock.defaultImage).asDriver(onErrorJustReturn: nil)
+    private (set) var image:Driver<UIImage?> =  Observable.just(DownloadTaskMock.defaultImage).asDriver(onErrorJustReturn: nil)
     
-    private (set) var title: Driver<String> = Observable.just(AvatarDownloadTaskMock.defaultAvatar.identifier).asDriver(onErrorJustReturn: "")
+    private (set) var title: Driver<String> = Observable.just(DownloadTaskMock.defaultAvatar.identifier).asDriver(onErrorJustReturn: "")
     
     private (set) var loading: Driver<Bool>
     

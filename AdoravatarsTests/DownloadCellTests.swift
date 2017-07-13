@@ -17,6 +17,8 @@ import RxCocoa
 
 class DownloadCellTests: XCTestCase {
     
+    typealias DTM = DownloadTaskMock
+    
     var sut:DownloadCell!
     
     override func setUp() {
@@ -38,26 +40,26 @@ class DownloadCellTests: XCTestCase {
     
     func testConfigureTitleConnected()
     {
-        let downloadVM = DownloadVM(AvatarDownloadTaskMock())
+        let downloadVM = DownloadVM(DTM())
         
         sut.configureWith(downloadVM)
         
-        XCTAssertEqual(sut.textLab.text, AvatarDownloadTaskMock.defaultAvatar.identifier)
+        XCTAssertEqual(sut.textLab.text, DTM.defaultAvatar.identifier)
     }
     
     
     func testConfigureStatusConnected()
     {
-        var expectedStatus = AvatarDownloadTaskMock.defaultStatus
-        var downloadVM = DownloadVM(AvatarDownloadTaskMock())
+        var expectedStatus = DTM.defaultStatus
+        var downloadVM = DownloadVM(DTM())
         
         sut.configureWith(downloadVM)
         
         XCTAssertEqual(sut.statusLabel.text, expectedStatus.rawValue)
         
-        expectedStatus = AvatarDownloadTask.Status.failed
+        expectedStatus = DownloadTask.Status.failed
         
-        downloadVM = DownloadVM(AvatarDownloadTaskMock(Observable.just(expectedStatus)))
+        downloadVM = DownloadVM(DTM(Observable.just(expectedStatus)))
 
         sut.configureWith(downloadVM)
         
@@ -68,7 +70,7 @@ class DownloadCellTests: XCTestCase {
     func testConfigureTimestampConnected()
     {
         let expectedDate = Date(timeIntervalSince1970: 1000)
-        let downloadVM = DownloadVM(AvatarDownloadTaskMock(updatedAt: Observable.just(expectedDate)))
+        let downloadVM = DownloadVM(DTM(updatedAt: Observable.just(expectedDate)))
         
         sut.configureWith(downloadVM)
         
@@ -79,7 +81,7 @@ class DownloadCellTests: XCTestCase {
     func testConfigureProgressConnected()
     {
         let expectedProgress = 0.66
-        let downloadVM = DownloadVM(AvatarDownloadTaskMock(progress: Observable.just(expectedProgress)))
+        let downloadVM = DownloadVM(DTM(progress: Observable.just(expectedProgress)))
         
         sut.configureWith(downloadVM)
         
@@ -96,7 +98,7 @@ class DownloadCellTests: XCTestCase {
             as! DownloadsVC
         
         
-        let downloadsVM = DownloadsVM(api: AvatarsManagerStubbed())
+        let downloadsVM = DownloadsVM(api: APIServiceStubbed())
         controller.viewModel = downloadsVM
         
         _ = controller.view

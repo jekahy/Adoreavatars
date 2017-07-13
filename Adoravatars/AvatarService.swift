@@ -30,7 +30,7 @@ class AvatarService: AvatarsGettable{
 
     //    MARK: Helpers
 
-    fileprivate func urlForAvatarID(_ id:String, baseURL:URL = APIBaseURLStrings.avatar.url!)->URL
+    fileprivate func urlForAvatarID(_ id:String, baseURL:URL = APIBaseURLs.avatar)->URL
     {
         return baseURL.appendingPathComponent(id)
     }

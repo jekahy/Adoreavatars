@@ -14,34 +14,22 @@ import RxCocoa
 @testable import Adoravatars
 
 
-class AvatarsGettableTests: XCTestCase {
+class AvatarServiceTests: XCTestCase {
     
-    typealias AMS = AvatarsManagerStubbed
+    typealias AMS = AvatarServiceStubbed
     
     var subscription: Disposable?
     var scheduler: TestScheduler!
     
-    let manager = AvatarsManagerStubbed()
+    let manager = AMS()
     
-    let avatar = AvatarDownloadTaskMock.defaultAvatar
+    let avatar = DownloadTaskMock.defaultAvatar
     
     var sut:AvatarsGettable!
 
     
     override func setUp() {
         super.setUp()
-        sut = AvatarsManager(baseURL: AMS.defaultBaseURL, sessionConfiguration: AMS.defaultSessionConfig, cache: AMS.defaultCache)
-    }
-    
-    func testInitAllLetSet()
-    {
-        XCTAssertEqual(sut.baseURL, AMS.defaultBaseURL)
-        XCTAssertEqual(sut.cache, AMS.defaultCache)
-        XCTAssertEqual(sut.sessionConfig, AMS.defaultSessionConfig)
-    }
-    
-    func testCacheSetInConfig()
-    {
-        XCTAssertTrue(sut.sessionConfig.urlCache===AMS.defaultCache)
+        sut = AvatarService()
     }
 }

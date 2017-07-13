@@ -50,7 +50,7 @@ class AvatarsVCTests: XCTestCase {
     func createSut<T>(type:T.Type)->T where T:AvatarsVC
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let avatarsVM = AvatarsVM(api: AvatarsManagerStubbed())
+        let avatarsVM = AvatarsVM(service:AvatarServiceStubbed())
         let controller = storyboard
             .instantiateViewController(withIdentifier: "AvatarsVC")
             as! T

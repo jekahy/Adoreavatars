@@ -18,12 +18,13 @@ class DownloadsVMTests: XCTestCase {
     var subscription: Disposable!
     var scheduler: TestScheduler!
 
-    let manager = AvatarsManagerStubbed()
+    let service = AvatarServiceStubbed()
+    let api = APIServiceStubbed()
     var vm:DownloadsVMType!
     
     override func setUp() {
         super.setUp()
-        vm = DownloadsVM(api: manager)
+        vm = DownloadsVM(api: api)
         scheduler = TestScheduler(initialClock: 0)
     }
     
@@ -39,22 +40,22 @@ class DownloadsVMTests: XCTestCase {
     func testAvatarDownloadTasksSet()
     {
         
-        let expected = [AvatarsManagerStubbed.defaultTask]
+        let expected = [APIServiceStubbed.defaultTask]
         
-        let observer = scheduler.createObserver(Array<AvatarDownloadTaskType>.self)
+        let observer = scheduler.createObserver(Array<DownloadTaskType>.self)
         
-        subscription = vm.AvatarDownloadTasks.drive(observer)
+        subscription = vm.downloadTasks.drive(observer)
         
         let result = observer.events
             .map{$0.value}
-            .flatMap{ event -> [AvatarDownloadTaskType]? in
+            .flatMap{ event -> [DownloadTaskType]? in
         
                 if case .next(let taskEvents) = event {
                     return taskEvents
                 }
                 return nil
             }.last
-        guard let res = result as? [AvatarDownloadTaskMock] else {
+        guard let res = result as? [DownloadTaskMock] else {
             XCTFail()
             return
         }

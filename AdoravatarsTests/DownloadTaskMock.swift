@@ -11,38 +11,43 @@ import RxSwift
 
 @testable import Adoravatars
 
-class AvatarDownloadTaskMock: AvatarDownloadTaskType {
+class DownloadTaskMock: DownloadTaskType {
     
+    let fileName = defaultAvatar.identifier
+
     let avatar = defaultAvatar
     let updatedAt:Observable<Date>
     let progress:Observable<Double>
-    let status:Observable<AvatarDownloadTask.Status>
-    let image:Observable<UIImage?>
+    let status:Observable<DownloadTask.Status>
+    let data:Observable<Data?>
 
 
-    static let defaultDate = Date(timeIntervalSince1970: 10000)
-    static let defaultImage = UIImage(named:"test_icon")!
-    static let defaultAvatar = Avatar(identifier: "Dart")
-    static let defaultStatus = AvatarDownloadTask.Status.done
-    static let defaultProgress = [0,0.5,1]
-    static let defaultDownloadEvents = AvatarsManagerStubbed.defaultDownloadEvents
+    private static let imgPath = Bundle.main.path(forResource: "test_icon", ofType: "png")!
     
-    init(_ status:Observable<AvatarDownloadTask.Status> = Observable.just(AvatarDownloadTaskMock.defaultStatus),
-         updatedAt:Observable<Date> = Observable.just(AvatarDownloadTaskMock.defaultDate),
-         progress:Observable<Double> = Observable.from(AvatarDownloadTaskMock.defaultProgress),
-         image:Observable<UIImage?> = Observable.just(AvatarDownloadTaskMock.defaultImage)) {
+    static let defaultDate = Date(timeIntervalSince1970: 10000)
+    static let defaultImage = UIImage(data: defaultData)!
+    static let defaultData = try! Data(contentsOf: URL(fileURLWithPath: imgPath))
+    static let defaultAvatar = Avatar(identifier: "Dart")
+    static let defaultStatus = DownloadTask.Status.done
+    static let defaultProgress = [0,0.5,1]
+    static let defaultDownloadEvents = APIServiceStubbed.defaultDownloadEvents
+    
+    init(_ status:Observable<DownloadTask.Status> = Observable.just(DownloadTaskMock.defaultStatus),
+         updatedAt:Observable<Date> = Observable.just(DownloadTaskMock.defaultDate),
+         progress:Observable<Double> = Observable.from(DownloadTaskMock.defaultProgress),
+         data:Observable<Data?> = Observable.just(DownloadTaskMock.defaultData)) {
         
         self.status = status
         self.updatedAt = updatedAt
         self.progress = progress
-        self.image = image
+        self.data = data
     }
 }
 
 
-extension AvatarDownloadTaskMock:Equatable
+extension DownloadTaskMock:Equatable
 {
-    static func ==(lhs: AvatarDownloadTaskMock, rhs: AvatarDownloadTaskMock) -> Bool
+    static func ==(lhs: DownloadTaskMock, rhs: DownloadTaskMock) -> Bool
     {
         return lhs === rhs
     }

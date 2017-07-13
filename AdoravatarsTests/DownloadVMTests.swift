@@ -16,16 +16,17 @@ import RxSwift
 class DownloadVMTests: XCTestCase {
     
     typealias RecordedE<T> = Recorded<Event<T>>
-
+    typealias DTM = DownloadTaskMock
+    
     var subscription: Disposable!
     var scheduler: TestScheduler!
     
-    let manager = AvatarsManagerStubbed()
+    let manager = AvatarServiceStubbed()
     var vm:DownloadVMType!
     
     override func setUp() {
         super.setUp()
-        vm = DownloadVM(AvatarDownloadTaskMock())
+        vm = DownloadVM(DTM())
         scheduler = TestScheduler(initialClock: 0)
         
     }
@@ -41,45 +42,45 @@ class DownloadVMTests: XCTestCase {
     
     func testTitle()
     {
-        let expected = AvatarDownloadTaskMock.defaultAvatar.identifier
+        let expected = DTM.defaultAvatar.identifier
         subscription = performDriverVariableTest(expected:expected , driverToTest: vm.title)
     }
     
     func testStatus()
     {
-        let expected = AvatarDownloadTaskMock.defaultStatus.rawValue
+        let expected = DTM.defaultStatus.rawValue
         subscription = performDriverVariableTest(expected:expected , driverToTest: vm.status)
  
     }
     
     func testStatusOnErrorNothing()
     {
-        let testEvents:[RecordedE<AvatarDownloadTask.Status>] = [next(0, .queued), next(100, .inProgress), error(200, DownloadError.failed) ]
+        let testEvents:[RecordedE<DownloadTask.Status>] = [next(0, .queued), next(100, .inProgress), error(200, DownloadError.failed) ]
         
         let observable = scheduler.createColdObservable(testEvents)
         let observer = scheduler.createObserver(String.self)
         
         
-        let AvatarDownloadTask = AvatarDownloadTaskMock(observable.asObservable())
+        let AvatarDownloadTask = DTM(observable.asObservable())
     
         vm = DownloadVM(AvatarDownloadTask)
 
         subscription = vm.status.drive(observer)
         scheduler.start()
 
-        XCTAssertEqual(observer.events, [next(0, AvatarDownloadTask.Status.queued.rawValue), next(100, AvatarDownloadTask.Status.inProgress.rawValue), next(200, ""), completed(200)])
+        XCTAssertEqual(observer.events, [next(0, DownloadTask.Status.queued.rawValue), next(100, DownloadTask.Status.inProgress.rawValue), next(200, ""), completed(200)])
     }
     
     
     func testTimeStampStartsWithDateOnErrorNothing()
     {
-        let testEvents:[RecordedE<Date>] = [next(0, AvatarDownloadTaskMock.defaultDate), error(100, DownloadError.failed) ]
+        let testEvents:[RecordedE<Date>] = [next(0, DTM.defaultDate), error(100, DownloadError.failed) ]
         let observable = scheduler.createColdObservable(testEvents)
 
-        let expectedDate = AvatarDownloadTaskMock.defaultDate.string
+        let expectedDate = DTM.defaultDate.string
         let observer = scheduler.createObserver(String.self)
 
-        let AvatarDownloadTask = AvatarDownloadTaskMock(updatedAt:observable.asObservable())
+        let AvatarDownloadTask = DTM(updatedAt:observable.asObservable())
 
         vm = DownloadVM(AvatarDownloadTask)
         

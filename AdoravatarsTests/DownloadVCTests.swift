@@ -16,7 +16,7 @@ class DownloadsVCTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let downloadsVM = DownloadsVM(api: AvatarsManagerStubbed())
+        let downloadsVM = DownloadsVM(api: APIServiceStubbed())
         sut = createSut(vm: downloadsVM)
     }
     

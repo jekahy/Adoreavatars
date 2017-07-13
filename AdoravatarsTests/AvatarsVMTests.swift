@@ -15,14 +15,14 @@ class AvatarsVMTests: XCTestCase {
     
     var subscription: Disposable!
     
-    let manager = AvatarsManagerStubbed()
+    let service = AvatarServiceStubbed()
     var vm:AvatarsVMType!
 
 
     override func setUp() {
         
         super.setUp()
-        vm = AvatarsVM(api: manager)
+        vm = AvatarsVM(service:service)
     }
     
     override func tearDown() {
@@ -42,13 +42,13 @@ class AvatarsVMTests: XCTestCase {
     
     func testInitWithAvatarsManager()
     {
-        let manager2 = vm.api
-        XCTAssert(manager as AvatarsGettable  === manager2)
+        let service2 = vm.service
+        XCTAssert(service as AvatarsGettable  === service2)
     }
     
     func testAvatars()
     {
-        let expected = [AvatarDownloadTaskMock.defaultAvatar]
+        let expected = [DownloadTaskMock.defaultAvatar]
         subscription = performDriverArrayTest(expected: expected, driverToTest: vm.avatars, title: #function)
     }
     
@@ -59,15 +59,15 @@ class AvatarsVMTests: XCTestCase {
         subscription = performDriverVariableTest(expected: expected, driverToTest: vm.title, title:#function)
     }
     
-    func testDownloadsVM()
-    {
-        let expected = DownloadsVM(api: manager)
-        let res = vm.downloadsVM as! DownloadsVM
-        XCTAssertEqual(expected, res)
-    }
+//    func testDownloadsVM()
+//    {
+//        let expected = DownloadsVM(api: APIService)
+//        let res = vm.downloadsVM as! DownloadsVM
+//        XCTAssertEqual(expected, res)
+//    }
+//    
+//    
     
-    
-        
     
 }
 

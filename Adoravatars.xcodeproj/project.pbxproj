@@ -44,6 +44,9 @@
 		E1D471011F150865004499BB /* AvatarsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D471001F150865004499BB /* AvatarsProviderTests.swift */; };
 		E1D471031F1574D5004499BB /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D471021F1574D5004499BB /* APIService.swift */; };
 		E1D471051F161714004499BB /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D471041F161714004499BB /* DownloadTask.swift */; };
+		E1E584F21F1777800095847C /* test_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E584F11F1777800095847C /* test_icon.png */; };
+		E1E584F31F1777B80095847C /* test_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E584F11F1777800095847C /* test_icon.png */; };
+		E1E584F51F1784A50095847C /* APIServiceStubbed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E584F41F1784A50095847C /* APIServiceStubbed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,8 @@
 		E1D471001F150865004499BB /* AvatarsProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarsProviderTests.swift; sourceTree = "<group>"; };
 		E1D471021F1574D5004499BB /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E1D471041F161714004499BB /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
+		E1E584F11F1777800095847C /* test_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_icon.png; sourceTree = "<group>"; };
+		E1E584F41F1784A50095847C /* APIServiceStubbed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceStubbed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +169,7 @@
 		E16801081F0402A30026F269 /* AdoravatarsTests */ = {
 			isa = PBXGroup;
 			children = (
+				E1E584F11F1777800095847C /* test_icon.png */,
 				E1B92D961F040F470078E122 /* Fakes */,
 				E1C47AA21F07A66500D7A5FD /* Cells */,
 				E1C47AA11F07A3F400D7A5FD /* View Models */,
@@ -250,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				E1B92D9A1F0410190078E122 /* AvatarsManagerStubbed.swift */,
+				E1E584F41F1784A50095847C /* APIServiceStubbed.swift */,
 				E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */,
 				E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */,
 			);
@@ -379,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E584F21F1777800095847C /* test_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E584F31F1777B80095847C /* test_icon.png in Resources */,
 				E1A0C0411EFA9782003393D9 /* LaunchScreen.storyboard in Resources */,
 				E1A0C03E1EFA9782003393D9 /* Assets.xcassets in Resources */,
 				E1A0C03C1EFA9782003393D9 /* Main.storyboard in Resources */,
@@ -498,6 +507,7 @@
 				E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */,
 				E1B92D9F1F042BB40078E122 /* AvatarVMTests.swift in Sources */,
 				E1B92DA01F04F4650078E122 /* AvatarsManagerStubbed.swift in Sources */,
+				E1E584F51F1784A50095847C /* APIServiceStubbed.swift in Sources */,
 				E1B92DA31F04F7C80078E122 /* DownloadsVMTests.swift in Sources */,
 				E1C47AA41F07A68A00D7A5FD /* AvatarCellTests.swift in Sources */,
 				E1D471011F150865004499BB /* AvatarsProviderTests.swift in Sources */,
