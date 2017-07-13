@@ -1,5 +1,5 @@
 //
-//  DownloadTaskTests.swift
+//  AvatarDownloadTaskTests.swift
 //  Adoravatars
 //
 //  Created by Eugene on 29.06.17.
@@ -14,18 +14,18 @@ import RxCocoa
 @testable import Adoravatars
 
 
-class DownloadTaskTests: XCTestCase {
+class AvatarDownloadTaskTests: XCTestCase {
     
-    typealias RecordedDTaskEvent = Recorded<Event<DownloadTaskEvent>>
+    typealias RecordedDTaskEvent = Recorded<Event<AvatarDownloadTaskEvent>>
     
     var subscription: Disposable?
     var scheduler: TestScheduler!
     
     let manager = AvatarsManagerStubbed()
     
-    let avatar = DownloadTaskMock.defaultAvatar
+    let avatar = AvatarDownloadTaskMock.defaultAvatar
 
-    var sut:DownloadTaskType!
+    var sut:AvatarDownloadTaskType!
     
     
     var defaultTestEvents:[RecordedDTaskEvent]  {
@@ -37,7 +37,7 @@ class DownloadTaskTests: XCTestCase {
     override func setUp() {
         
         super.setUp()
-        sut = DownloadTask(avatar:avatar, eventsObservable:AvatarsManagerStubbed.defaultEventsObservable)
+        sut = AvatarDownloadTask(avatar:avatar, eventsObservable:AvatarsManagerStubbed.defaultEventsObservable)
         scheduler = TestScheduler(initialClock: 0)
     }
     
@@ -52,19 +52,19 @@ class DownloadTaskTests: XCTestCase {
     
     func testInitAvatar()
     {
-        let expected = DownloadTaskMock.defaultAvatar
+        let expected = AvatarDownloadTaskMock.defaultAvatar
         XCTAssertEqual(expected, sut.avatar)
     }
     
     func testProgress()
     {
-        let timeArr = generateTimeFor(elementsNum: DownloadTaskMock.defaultDownloadEvents.count)
-        let expected = zip(timeArr, DownloadTaskMock.defaultProgress).map{next($0,$1)}
+        let timeArr = generateTimeFor(elementsNum: AvatarDownloadTaskMock.defaultDownloadEvents.count)
+        let expected = zip(timeArr, AvatarDownloadTaskMock.defaultProgress).map{next($0,$1)}
 
         let observable = scheduler.createColdObservable(defaultTestEvents)
         let observer = scheduler.createObserver(Double.self)
         
-        sut = DownloadTask(avatar:avatar, eventsObservable:observable.asObservable())
+        sut = AvatarDownloadTask(avatar:avatar, eventsObservable:observable.asObservable())
         
         subscription = sut.progress.subscribe(observer)
         
@@ -84,7 +84,7 @@ class DownloadTaskTests: XCTestCase {
         var res = [Bool]()
         let observable = scheduler.createColdObservable(testEvents)
         
-        sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
+        sut = AvatarDownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
 
         subscription = sut.updatedAt.scan(Date()) { previousDate, currentDate in
             res.append(previousDate != currentDate)
@@ -104,14 +104,14 @@ class DownloadTaskTests: XCTestCase {
         testEvents.append(error(200, DownloadError.failed))
         
         let observable = scheduler.createColdObservable(testEvents)
-        let observer = scheduler.createObserver(DownloadTask.Status.self)
+        let observer = scheduler.createObserver(AvatarDownloadTask.Status.self)
         
-        sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
+        sut = AvatarDownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
         
         subscription = sut.status.subscribe(observer)
         
         scheduler.scheduleAt(250) {
-            let expected:[Recorded<Event<DownloadTask.Status>>] =  [next(0, .queued), next(0, .inProgress),next(50, .inProgress),next(100, .inProgress), next(150, .done), next(200, .failed)]
+            let expected:[Recorded<Event<AvatarDownloadTask.Status>>] =  [next(0, .queued), next(0, .inProgress),next(50, .inProgress),next(100, .inProgress), next(150, .done), next(200, .failed)]
             XCTAssertEqual(expected, observer.events)
         }
         scheduler.start()
@@ -122,9 +122,9 @@ class DownloadTaskTests: XCTestCase {
         let testEvents:[RecordedDTaskEvent] = [completed(100)]
         
         let observable = scheduler.createColdObservable(testEvents)
-        let observer = scheduler.createObserver(DownloadTask.Status.self)
+        let observer = scheduler.createObserver(AvatarDownloadTask.Status.self)
         
-        sut = DownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
+        sut = AvatarDownloadTask(avatar: avatar, eventsObservable: observable.asObservable().share())
         
         subscription = sut.status.subscribe(observer)
         
@@ -138,7 +138,7 @@ class DownloadTaskTests: XCTestCase {
     
     func testImage()
     {
-        let expected = DownloadTaskMock.defaultImage
+        let expected = AvatarDownloadTaskMock.defaultImage
         let observer = scheduler.createObserver(Optional<UIImage>.self)
         subscription = sut.image.subscribe(observer)
         

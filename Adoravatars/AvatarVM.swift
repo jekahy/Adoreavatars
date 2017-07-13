@@ -9,6 +9,7 @@
 
 import RxSwift
 import RxCocoa
+import RxSwiftExt
 import Foundation
 
 protocol AvatarVMType:class {
@@ -24,14 +25,13 @@ class AvatarVM:AvatarVMType  {
     let loading:Driver<Bool>
     let image:Driver<UIImage?>
     
-    
-    init(_ avatar:Avatar, api: AvatarsProvider) {
+    init(_ avatar:Avatar, service: AvatarsGettable, api:APIDownloadable) {
         
         title = Driver.just(avatar.identifier)
 
-        image = api.downloadAvatarImage(avatar).image.asDriver(onErrorJustReturn: nil)
+        image = service.downloadAvatarImage(avatar, api:api).data.unwrap().map{UIImage(data: $0)}.asDriver(onErrorJustReturn: nil)
         
-        loading = api.downloadAvatarImage(avatar).status
+        loading = service.downloadAvatarImage(avatar, api: api).status
             .map({ status -> Bool in
                 switch status{
                     case .inProgress, .queued: return true

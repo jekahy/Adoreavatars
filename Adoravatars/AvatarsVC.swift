@@ -28,7 +28,7 @@ class AvatarsVC: UIViewController {
         viewModel.avatars.drive(collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){
             [unowned self](index, avatar: Avatar, cell) in
             
-            let avatarVM = AvatarVM(avatar, api: self.viewModel.api)
+            let avatarVM = self.viewModel.avatarVM(for:avatar)
             cell.configure(with: avatarVM)
 
         }.disposed(by: disposeBag)

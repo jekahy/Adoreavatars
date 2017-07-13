@@ -29,7 +29,7 @@ class DownloadVM:DownloadVMType {
     
     init(_ task:DownloadTaskType) {
 
-        title = Driver.just(task.avatar.identifier)
+        title = Driver.just(task.fileName)
 
         status = task.status.map{$0.rawValue}.asDriver(onErrorJustReturn: "")
         timestamp = task.updatedAt.map{$0.string}.asDriver(onErrorJustReturn: "")

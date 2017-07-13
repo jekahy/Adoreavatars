@@ -11,35 +11,35 @@ import RxSwift
 
 @testable import Adoravatars
 
-class AvatarsManagerStubbed: AvatarsProvider {
+class AvatarsManagerStubbed: AvatarsGettable {
     
     
     let baseURL = AvatarsManagerStubbed.defaultBaseURL
     let cache = AvatarsManagerStubbed.defaultCache
     let sessionConfig = AvatarsManagerStubbed.defaultSessionConfig
     
-    let downloadTasks:Observable<[DownloadTaskType]> = Observable.just([AvatarsManagerStubbed.defaultTask])
+    let AvatarDownloadTasks:Observable<[AvatarDownloadTaskType]> = Observable.just([AvatarsManagerStubbed.defaultTask])
     
-    static let defaultTask = DownloadTaskMock()
+    static let defaultTask = AvatarDownloadTaskMock()
     
-    static let defaultDownloadEvents:[DownloadTaskEvent] = DownloadTaskMock.defaultProgress.map{DownloadTaskEvent.progress($0)} + [.done(DownloadTaskMock.defaultImage)]
+    static let defaultDownloadEvents:[AvatarDownloadTaskEvent] = AvatarDownloadTaskMock.defaultProgress.map{AvatarDownloadTaskEvent.progress($0)} + [.done(AvatarDownloadTaskMock.defaultImage)]
     
     static let defaultEventsObservable = Observable.from(AvatarsManagerStubbed.defaultDownloadEvents)
     
-    func downloadAvatarImage(_ avatar: Avatar) -> DownloadTaskType {
+    func downloadAvatarImage(_ avatar: Avatar) -> AvatarDownloadTaskType {
         
-        return DownloadTaskMock()
+        return AvatarDownloadTaskMock()
     }
     
     
-    func downloadAvatarImageWithError(_ avatar: Avatar) -> Observable<DownloadTaskEvent> {
+    func downloadAvatarImageWithError(_ avatar: Avatar) -> Observable<AvatarDownloadTaskEvent> {
         
         return Observable.error(DownloadError.failed)
     }
     
     func getAvatars() -> Observable<[Avatar]> {
        
-        return Observable.just([DownloadTaskMock.defaultAvatar])
+        return Observable.just([AvatarDownloadTaskMock.defaultAvatar])
     }
 }
 

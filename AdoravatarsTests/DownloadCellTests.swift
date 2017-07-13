@@ -38,26 +38,26 @@ class DownloadCellTests: XCTestCase {
     
     func testConfigureTitleConnected()
     {
-        let downloadVM = DownloadVM(DownloadTaskMock())
+        let downloadVM = DownloadVM(AvatarDownloadTaskMock())
         
         sut.configureWith(downloadVM)
         
-        XCTAssertEqual(sut.textLab.text, DownloadTaskMock.defaultAvatar.identifier)
+        XCTAssertEqual(sut.textLab.text, AvatarDownloadTaskMock.defaultAvatar.identifier)
     }
     
     
     func testConfigureStatusConnected()
     {
-        var expectedStatus = DownloadTaskMock.defaultStatus
-        var downloadVM = DownloadVM(DownloadTaskMock())
+        var expectedStatus = AvatarDownloadTaskMock.defaultStatus
+        var downloadVM = DownloadVM(AvatarDownloadTaskMock())
         
         sut.configureWith(downloadVM)
         
         XCTAssertEqual(sut.statusLabel.text, expectedStatus.rawValue)
         
-        expectedStatus = DownloadTask.Status.failed
+        expectedStatus = AvatarDownloadTask.Status.failed
         
-        downloadVM = DownloadVM(DownloadTaskMock(Observable.just(expectedStatus)))
+        downloadVM = DownloadVM(AvatarDownloadTaskMock(Observable.just(expectedStatus)))
 
         sut.configureWith(downloadVM)
         
@@ -68,7 +68,7 @@ class DownloadCellTests: XCTestCase {
     func testConfigureTimestampConnected()
     {
         let expectedDate = Date(timeIntervalSince1970: 1000)
-        let downloadVM = DownloadVM(DownloadTaskMock(updatedAt: Observable.just(expectedDate)))
+        let downloadVM = DownloadVM(AvatarDownloadTaskMock(updatedAt: Observable.just(expectedDate)))
         
         sut.configureWith(downloadVM)
         
@@ -79,7 +79,7 @@ class DownloadCellTests: XCTestCase {
     func testConfigureProgressConnected()
     {
         let expectedProgress = 0.66
-        let downloadVM = DownloadVM(DownloadTaskMock(progress: Observable.just(expectedProgress)))
+        let downloadVM = DownloadVM(AvatarDownloadTaskMock(progress: Observable.just(expectedProgress)))
         
         sut.configureWith(downloadVM)
         

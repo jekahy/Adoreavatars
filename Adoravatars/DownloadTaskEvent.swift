@@ -1,5 +1,5 @@
 //
-//  DownloadTaskEvent.swift
+//  AvatarDownloadTaskEvent.swift
 //  Adoravatars
 //
 //  Created by Eugene on 29.06.17.
@@ -11,7 +11,7 @@ import RxSwift
 enum DownloadTaskEvent:Equatable {
     
     case progress(Double)
-    case done(UIImage)
+    case done(Data)
     case finish
     
     func didComplete()->Bool {
@@ -30,8 +30,8 @@ enum DownloadTaskEvent:Equatable {
         switch (lhs, rhs) {
         case (let .progress(progressL), let .progress(progressR)):
             return progressL == progressR
-        case (let .done(imageL), let .done(imageR)):
-            return imageL == imageR
+        case (let .done(dataL), let .done(dataR)):
+            return dataL == dataR
         case (.finish, .finish):
             return true
         default:

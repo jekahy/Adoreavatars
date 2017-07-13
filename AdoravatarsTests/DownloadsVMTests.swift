@@ -36,25 +36,25 @@ class DownloadsVMTests: XCTestCase {
     
     // MARK: Tests
     
-    func testDownloadTasksSet()
+    func testAvatarDownloadTasksSet()
     {
         
         let expected = [AvatarsManagerStubbed.defaultTask]
         
-        let observer = scheduler.createObserver(Array<DownloadTaskType>.self)
+        let observer = scheduler.createObserver(Array<AvatarDownloadTaskType>.self)
         
-        subscription = vm.downloadTasks.drive(observer)
+        subscription = vm.AvatarDownloadTasks.drive(observer)
         
         let result = observer.events
             .map{$0.value}
-            .flatMap{ event -> [DownloadTaskType]? in
+            .flatMap{ event -> [AvatarDownloadTaskType]? in
         
                 if case .next(let taskEvents) = event {
                     return taskEvents
                 }
                 return nil
             }.last
-        guard let res = result as? [DownloadTaskMock] else {
+        guard let res = result as? [AvatarDownloadTaskMock] else {
             XCTFail()
             return
         }

@@ -1,5 +1,5 @@
 //
-//  AvatarsProviderTests.swift
+//  AvatarsGettableTests.swift
 //  Adoravatars
 //
 //  Created by Eugene on 11.07.17.
@@ -14,7 +14,7 @@ import RxCocoa
 @testable import Adoravatars
 
 
-class AvatarsProviderTests: XCTestCase {
+class AvatarsGettableTests: XCTestCase {
     
     typealias AMS = AvatarsManagerStubbed
     
@@ -23,9 +23,9 @@ class AvatarsProviderTests: XCTestCase {
     
     let manager = AvatarsManagerStubbed()
     
-    let avatar = DownloadTaskMock.defaultAvatar
+    let avatar = AvatarDownloadTaskMock.defaultAvatar
     
-    var sut:AvatarsProvider!
+    var sut:AvatarsGettable!
 
     
     override func setUp() {

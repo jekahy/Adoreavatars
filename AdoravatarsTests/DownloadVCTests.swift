@@ -34,7 +34,7 @@ class DownloadsVCTests: XCTestCase {
     }
     
     
-    func testInitDownloadTasksConnected()
+    func testInitAvatarDownloadTasksConnected()
     {
         let rows = sut.tableView.numberOfRows(inSection: 0)
         XCTAssertEqual(rows, 1)

@@ -43,12 +43,12 @@ class AvatarsVMTests: XCTestCase {
     func testInitWithAvatarsManager()
     {
         let manager2 = vm.api
-        XCTAssert(manager as AvatarsProvider  === manager2)
+        XCTAssert(manager as AvatarsGettable  === manager2)
     }
     
     func testAvatars()
     {
-        let expected = [DownloadTaskMock.defaultAvatar]
+        let expected = [AvatarDownloadTaskMock.defaultAvatar]
         subscription = performDriverArrayTest(expected: expected, driverToTest: vm.avatars, title: #function)
     }
     
