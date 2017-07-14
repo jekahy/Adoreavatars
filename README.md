@@ -36,14 +36,13 @@ were to use the **URLCache** that could be set at the time of session init and t
 operator on task observer. ShareReplay operator would allow me to get the latest event from the observable on subscription even upon 
 completion. URLCache approach however was much more flexible and allowed to persist the requests to disk if needed by simply changing its 
 config. At the time when I was doing the code quiz due either to the lack of time and the pressure of the approaching submit deadline (I had
-aproximately 4 hours) or for some other mysterious reason I have sticked to the first approach. Even now after a nice amount of the refactoring
-the shareReplay operator still does the thing for me, even though the URLCache is hooked-up too.
+aproximately 4 hours) or for some other mysterious reason I have sticked to the first approach. Now after a nice amount of the refactoring
+the BehaviorSubject does the job for me, even though the URLCache is hooked-up too.
 
 ## Adorable 
 
-The API for this project was the [adorable](http://api.adorable.io) avatar API. This service provides avatar placeholder for web developers and designers and 
-is easy to use due to the lack of any authorization/authentication. You can simply send a request with the avatar id in the url and it will
-provide you with the image. 
+The data provider for this project was the [adorable](http://api.adorable.io) avatar API. The service provides avatars placeholder for web developers and designers and 
+is easy to use due to the lack of any authorization/authentication. You can simply send a request with the avatar id in the url and it will provide you with the image. 
 
 ## UI
 
