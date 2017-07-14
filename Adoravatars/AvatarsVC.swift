@@ -9,14 +9,14 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Then
 
 class AvatarsVC: UIViewController {
 
-    let cellIdentifier = "avatarCell"
-    let toDownloadsSegue = "toDownloadsVC"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var viewModel:AvatarsVMType = AvatarsVM()
+    private var viewModel:AvatarsVMType = AvatarsVM()
+    private var navigator:Navigator = Navigator()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad()
@@ -25,7 +25,7 @@ class AvatarsVC: UIViewController {
         
         viewModel.title.drive(navigationItem.rx.title).disposed(by: disposeBag)
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        viewModel.avatars.drive(collectionView.rx.items(cellIdentifier: cellIdentifier, cellType: AvatarCell.self)){
+        viewModel.avatars.drive(collectionView.rx.items(cellIdentifier: AvatarCell.cellIdentifier, cellType: AvatarCell.self)){
             [unowned self](index, avatar: Avatar, cell) in
             
             let avatarVM = self.viewModel.avatarVM(for:avatar)
@@ -40,14 +40,17 @@ class AvatarsVC: UIViewController {
             .throttle(1, latest: true, scheduler: MainScheduler.instance)
             .subscribe(onNext:{ [unowned self] _ in
             
-            self.performSegue(withIdentifier: self.toDownloadsSegue, sender: nil)
+                self.navigator.show(segue: .downloadsList(self.viewModel.api), sender: self)
             
         }).disposed(by: disposeBag)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == toDownloadsSegue, let downloadsVC = segue.destination as? DownloadsVC{
-            downloadsVC.viewModel = viewModel.downloadsVM
+    
+    static func createWith(navigator: Navigator, storyboard: UIStoryboard, viewModel: AvatarsVMType) -> AvatarsVC {
+        
+        return storyboard.instantiateViewController(ofType: AvatarsVC.self).then { vc in
+            vc.navigator = navigator
+            vc.viewModel = viewModel
         }
     }
 }

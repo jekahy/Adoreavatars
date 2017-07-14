@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import Then
 
 class DownloadsVC: UIViewController {
     
@@ -17,9 +18,10 @@ class DownloadsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    fileprivate let disposeBag = DisposeBag()
-    
-    var viewModel:DownloadsVMType!
+    private let disposeBag = DisposeBag()
+
+    private var viewModel:DownloadsVMType!
+    private var navigator:Navigator!
     
     override func viewDidLoad()
     {
@@ -33,6 +35,14 @@ class DownloadsVC: UIViewController {
             cell.configureWith(downloadVM)
             
             }.addDisposableTo(disposeBag)
+    }
+    
+    static func createWith(navigator: Navigator, storyboard: UIStoryboard, viewModel: DownloadsVMType) -> DownloadsVC {
+        
+        return storyboard.instantiateViewController(ofType: DownloadsVC.self).then { vc in
+            vc.navigator = navigator
+            vc.viewModel = viewModel
+        }
     }
 
 }

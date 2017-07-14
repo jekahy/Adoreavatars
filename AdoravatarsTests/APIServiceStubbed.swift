@@ -12,7 +12,6 @@ import RxSwift
 
 class APIServiceStubbed:APIDownloadable  {
     
- 
     let baseURL = FDP.defaultBaseURL
     let cache = FDP.defaultCache
     let sessionConfig = FDP.defaultSessionConfig

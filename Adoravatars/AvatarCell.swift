@@ -9,7 +9,10 @@
 import UIKit
 import RxSwift
 
+
 class AvatarCell: UICollectionViewCell {
+    
+    static let cellIdentifier = "avatarCell"
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imgView: UIImageView!

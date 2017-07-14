@@ -25,7 +25,7 @@ class AvatarService: AvatarsGettable{
     
     func getAvatars()->Observable<[Avatar]>
     {
-        return AvatarService.defaultAvatars()
+        return type(of: self).defaultAvatars()
     }
 
     //    MARK: Helpers
