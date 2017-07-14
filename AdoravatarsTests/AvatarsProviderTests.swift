@@ -15,15 +15,13 @@ import RxCocoa
 
 
 class AvatarServiceTests: XCTestCase {
-    
-    typealias AMS = AvatarServiceStubbed
-    
+        
     var subscription: Disposable?
     var scheduler: TestScheduler!
     
-    let manager = AMS()
+    let manager = AvatarServiceStubbed()
     
-    let avatar = DownloadTaskMock.defaultAvatar
+    let avatar = FDP.defaultAvatar
     
     var sut:AvatarsGettable!
 

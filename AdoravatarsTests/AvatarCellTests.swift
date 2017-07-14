@@ -60,7 +60,7 @@ class AvatarCellTests: XCTestCase {
         let avatarVM = AvatarVMMock()
         sut.configure(with: avatarVM)
 
-        XCTAssertEqual(self.sut.imgView.image, DownloadTaskMock.defaultImage)
+        XCTAssertEqual(self.sut.imgView.image, FDP.defaultImage)
     }
     
     func testConfigureLoadingConnected()
@@ -82,7 +82,7 @@ class AvatarCellTests: XCTestCase {
         let avatarVM = AvatarVMMock()
         sut.configure(with: avatarVM)
         
-        XCTAssertEqual(self.sut.textLabel.text, DownloadTaskMock.defaultAvatar.identifier)
+        XCTAssertEqual(self.sut.textLabel.text, FDP.defaultAvatar.identifier)
     }
     
     // MARK: Helpers

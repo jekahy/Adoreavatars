@@ -47,6 +47,7 @@
 		E1E584F21F1777800095847C /* test_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E584F11F1777800095847C /* test_icon.png */; };
 		E1E584F31F1777B80095847C /* test_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E584F11F1777800095847C /* test_icon.png */; };
 		E1E584F51F1784A50095847C /* APIServiceStubbed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E584F41F1784A50095847C /* APIServiceStubbed.swift */; };
+		E1E584F71F18C3CE0095847C /* FakeDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E584F61F18C3CE0095847C /* FakeDefaultsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		E1D471041F161714004499BB /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
 		E1E584F11F1777800095847C /* test_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_icon.png; sourceTree = "<group>"; };
 		E1E584F41F1784A50095847C /* APIServiceStubbed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceStubbed.swift; sourceTree = "<group>"; };
+		E1E584F61F18C3CE0095847C /* FakeDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDefaultsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				E1E584F41F1784A50095847C /* APIServiceStubbed.swift */,
 				E1B92DAC1F06F90C0078E122 /* DownloadTaskMock.swift */,
 				E1C47AA51F07EDE600D7A5FD /* AvatarVMMock.swift */,
+				E1E584F61F18C3CE0095847C /* FakeDefaultsProvider.swift */,
 			);
 			name = Fakes;
 			path = AdoravatarsTests;
@@ -502,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B92DAD1F06F90C0078E122 /* DownloadTaskMock.swift in Sources */,
+				E1E584F71F18C3CE0095847C /* FakeDefaultsProvider.swift in Sources */,
 				E1B92DA51F056B470078E122 /* XCTestCaseExtensions.swift in Sources */,
 				E195E5731F084A2A00AF51D4 /* AvatarsVCTests.swift in Sources */,
 				E168010A1F0402A30026F269 /* AvatarTests.swift in Sources */,

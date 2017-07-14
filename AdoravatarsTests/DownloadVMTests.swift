@@ -42,13 +42,13 @@ class DownloadVMTests: XCTestCase {
     
     func testTitle()
     {
-        let expected = DTM.defaultAvatar.identifier
+        let expected = FDP.defaultAvatar.identifier
         subscription = performDriverVariableTest(expected:expected , driverToTest: vm.title)
     }
     
     func testStatus()
     {
-        let expected = DTM.defaultStatus.rawValue
+        let expected = FDP.defaultStatus.rawValue
         subscription = performDriverVariableTest(expected:expected , driverToTest: vm.status)
  
     }
@@ -74,10 +74,10 @@ class DownloadVMTests: XCTestCase {
     
     func testTimeStampStartsWithDateOnErrorNothing()
     {
-        let testEvents:[RecordedE<Date>] = [next(0, DTM.defaultDate), error(100, DownloadError.failed) ]
+        let testEvents:[RecordedE<Date>] = [next(0, FDP.defaultDate), error(100, DownloadError.failed) ]
         let observable = scheduler.createColdObservable(testEvents)
 
-        let expectedDate = DTM.defaultDate.string
+        let expectedDate = FDP.defaultDate.string
         let observer = scheduler.createObserver(String.self)
 
         let AvatarDownloadTask = DTM(updatedAt:observable.asObservable())

@@ -13,29 +13,18 @@ import RxSwift
 
 class DownloadTaskMock: DownloadTaskType {
     
-    let fileName = defaultAvatar.identifier
+    let fileName = FDP.defaultAvatar.identifier
 
-    let avatar = defaultAvatar
+    let avatar = FDP.defaultAvatar
     let updatedAt:Observable<Date>
     let progress:Observable<Double>
     let status:Observable<DownloadTask.Status>
-    let data:Observable<Data?>
-
-
-    private static let imgPath = Bundle.main.path(forResource: "test_icon", ofType: "png")!
+    let data:Observable<Data?>    
     
-    static let defaultDate = Date(timeIntervalSince1970: 10000)
-    static let defaultImage = UIImage(data: defaultData)!
-    static let defaultData = try! Data(contentsOf: URL(fileURLWithPath: imgPath))
-    static let defaultAvatar = Avatar(identifier: "Dart")
-    static let defaultStatus = DownloadTask.Status.done
-    static let defaultProgress = [0,0.5,1]
-    static let defaultDownloadEvents = APIServiceStubbed.defaultDownloadEvents
-    
-    init(_ status:Observable<DownloadTask.Status> = Observable.just(DownloadTaskMock.defaultStatus),
-         updatedAt:Observable<Date> = Observable.just(DownloadTaskMock.defaultDate),
-         progress:Observable<Double> = Observable.from(DownloadTaskMock.defaultProgress),
-         data:Observable<Data?> = Observable.just(DownloadTaskMock.defaultData)) {
+    init(_ status:Observable<DownloadTask.Status> = Observable.just(FDP.defaultStatus),
+         updatedAt:Observable<Date> = Observable.just(FDP.defaultDate),
+         progress:Observable<Double> = Observable.from(FDP.defaultProgress),
+         data:Observable<Data?> = Observable.just(FDP.defaultData)) {
         
         self.status = status
         self.updatedAt = updatedAt

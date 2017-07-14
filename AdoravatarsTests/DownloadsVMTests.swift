@@ -40,7 +40,7 @@ class DownloadsVMTests: XCTestCase {
     func testAvatarDownloadTasksSet()
     {
         
-        let expected = [APIServiceStubbed.defaultTask]
+        let expected = [FDP.defaultTask]
         
         let observer = scheduler.createObserver(Array<DownloadTaskType>.self)
         

@@ -24,7 +24,7 @@ class AvatarVMTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        vm = AvatarVM(DownloadTaskMock.defaultAvatar, service: service, api: api)
+        vm = AvatarVM(FDP.defaultAvatar, service: service, api: api)
         scheduler = TestScheduler(initialClock: 0)
     }
     
@@ -48,7 +48,7 @@ class AvatarVMTests: XCTestCase {
     
     func testImage()
     {
-        let expectedData = UIImagePNGRepresentation(DownloadTaskMock.defaultImage)
+        let expectedData = UIImagePNGRepresentation(FDP.defaultImage)
 
         let observer = scheduler.createObserver((Optional<UIImage>).self)
         

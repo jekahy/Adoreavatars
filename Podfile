@@ -20,4 +20,5 @@ target 'AdoravatarsTests' do
 
 shared_pods
 pod 'RxTest'
+
 end

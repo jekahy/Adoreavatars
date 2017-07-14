@@ -26,7 +26,7 @@ class AvatarServiceStubbed: AvatarsGettable {
     
     func getAvatars() -> Observable<[Avatar]> {
        
-        return Observable.just([DownloadTaskMock.defaultAvatar])
+        return Observable.just([FDP.defaultAvatar])
     }
 }
 

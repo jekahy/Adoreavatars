@@ -13,31 +13,31 @@ import RxCocoa
 
 @testable import Adoravatars
 
-
 class DownloadTaskTests: XCTestCase {
     
     typealias RecordedDTaskEvent = Recorded<Event<DownloadTaskEvent>>
     typealias AMS = AvatarServiceStubbed
+    
     var subscription: Disposable?
     var scheduler: TestScheduler!
     
     let service = AMS()
     
-    let avatar = DownloadTaskMock.defaultAvatar
+    let avatar = FDP.defaultAvatar
 
     var sut:DownloadTaskType!
     
     
     var defaultTestEvents:[RecordedDTaskEvent]  {
-        let times = generateTimeFor(elementsNum:APIServiceStubbed.defaultDownloadEvents.count)
-        return zip(times, APIServiceStubbed.defaultDownloadEvents).map{next($0,$1)}
+        let times = generateTimeFor(elementsNum:FDP.defaultDownloadEvents.count)
+        return zip(times, FDP.defaultDownloadEvents).map{next($0,$1)}
     }
     
     
     override func setUp() {
         
         super.setUp()
-        sut = DownloadTask(avatar.identifier, eventsObservable: APIServiceStubbed.defaultEventsObservable)
+        sut = DownloadTask(avatar.identifier, eventsObservable: FDP.defaultEventsObservable)
         scheduler = TestScheduler(initialClock: 0)
     }
     
@@ -52,14 +52,14 @@ class DownloadTaskTests: XCTestCase {
     
     func testInitAvatar()
     {
-        let expected = DownloadTaskMock.defaultAvatar.identifier
+        let expected = FDP.defaultAvatar.identifier
         XCTAssertEqual(expected, sut.fileName)
     }
     
     func testProgress()
     {
-        let timeArr = generateTimeFor(elementsNum: DownloadTaskMock.defaultDownloadEvents.count)
-        let expected = zip(timeArr, DownloadTaskMock.defaultProgress).map{next($0,$1)}
+        let timeArr = generateTimeFor(elementsNum: FDP.defaultDownloadEvents.count)
+        let expected = zip(timeArr, FDP.defaultProgress).map{next($0,$1)}
 
         let observable = scheduler.createColdObservable(defaultTestEvents)
         let observer = scheduler.createObserver(Double.self)
@@ -138,7 +138,7 @@ class DownloadTaskTests: XCTestCase {
     
     func testImage()
     {
-        let expected = DownloadTaskMock.defaultData
+        let expected = FDP.defaultData
         let observer = scheduler.createObserver(Optional<Data>.self)
         subscription = sut.data.subscribe(observer)
         

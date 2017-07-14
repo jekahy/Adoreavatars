@@ -44,13 +44,13 @@ class DownloadCellTests: XCTestCase {
         
         sut.configureWith(downloadVM)
         
-        XCTAssertEqual(sut.textLab.text, DTM.defaultAvatar.identifier)
+        XCTAssertEqual(sut.textLab.text, FDP.defaultAvatar.identifier)
     }
     
     
     func testConfigureStatusConnected()
     {
-        var expectedStatus = DTM.defaultStatus
+        var expectedStatus = FDP.defaultStatus
         var downloadVM = DownloadVM(DTM())
         
         sut.configureWith(downloadVM)
