@@ -21,13 +21,12 @@ approach I prefer as well as the language: Obj-C or Swift.
 
 ## RxSwift
 
-As I've been digging into the world of FRP and specifically the RxSwift library, I thought it would be a great tool to apply and simplify 
-a lot of asynchronous things here.
+As I've been digging into the world of FRP and specifically the RxSwift library for a while, I have considered it to be a great candidate to apply here that would simplify a lot of asynchronous stuff.
 
 ## URLSession
 
 For the actual download of the images a URLSession and it's URLSessionDownloadTask were utilized. This way it was possible to track the 
-download progress of the task and report it to the user with a progress indicator. 
+download progress of the task and report it to the user with a progress indicator. Again, in any other project I would with high probability consider using the [Alamofire](https://github.com/Alamofire/Alamofire), which even got the [rx wrapper](https://github.com/RxSwiftCommunity/RxAlamofire) already written. 
 
 ## Caching 
 
